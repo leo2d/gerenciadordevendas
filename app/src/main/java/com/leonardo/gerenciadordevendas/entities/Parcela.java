@@ -1,8 +1,7 @@
 package com.leonardo.gerenciadordevendas.entities;
 
-import java.util.Date;
-
 public class Parcela extends BaseEntity {
+
     public Parcela(int diaVencimento, double valor, int idVenda) {
         this.diaVencimento = diaVencimento;
         this.valor = valor;

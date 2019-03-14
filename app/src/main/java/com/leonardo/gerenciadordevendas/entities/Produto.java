@@ -5,9 +5,25 @@ public class Produto extends BaseEntity {
     public Produto() {
     }
 
+    public Produto(int idProduto, String titulo, String descricao, double preco) {
+        this.idProduto = idProduto;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.preco = preco;
+    }
+
+    private int idProduto;
     private String titulo;
     private String descricao;
     private double preco;
+
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
 
     public String getTitulo() {
         return titulo;

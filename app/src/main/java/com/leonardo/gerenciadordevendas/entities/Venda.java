@@ -3,9 +3,9 @@ package com.leonardo.gerenciadordevendas.entities;
 import java.util.List;
 
 public class Venda extends BaseEntity {
-    public Venda() {
-    }
 
+
+    private int idVenda;
     private int idproduto;
     private int idCliente;
     private boolean isParcelado;
@@ -14,6 +14,22 @@ public class Venda extends BaseEntity {
     private List<Parcela>  parcelas;
     private Produto produto;
     private Cliente cliente;
+
+    public Venda() {
+    }
+
+    public Venda(int idVenda, int idproduto, int idCliente,
+                 boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas,
+                 Produto produto, Cliente cliente) {
+        this.idVenda = idVenda;
+        this.idproduto = idproduto;
+        this.idCliente = idCliente;
+        this.isParcelado = isParcelado;
+        this.quantidadeParcelas = quantidadeParcelas;
+        this.parcelas = parcelas;
+        this.produto = produto;
+        this.cliente = cliente;
+    }
 
     public void gerarParcelas(int diaVencimento) {
         for (int i = 0; i < quantidadeParcelas; i++)
@@ -33,6 +49,34 @@ public class Venda extends BaseEntity {
             }
 
         return resultado;
+    }
+
+    public int getIdVenda() {
+        return idVenda;
+    }
+
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
+    }
+
+    public int getIdproduto() {
+        return idproduto;
+    }
+
+    public void setIdproduto(int idproduto) {
+        this.idproduto = idproduto;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public void setParcelas(List<Parcela> parcelas) {
+        this.parcelas = parcelas;
     }
 
     public Cliente getCliente() {

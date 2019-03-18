@@ -2,6 +2,14 @@ package com.leonardo.gerenciadordevendas.entities;
 
 public class Parcela extends BaseEntity {
 
+    private int idParcela;
+    private boolean foiPaga;
+    private int diaVencimento;
+    private double valor;
+
+    private int idVenda;
+    private Venda venda;
+
     public Parcela(int diaVencimento, double valor, int idVenda) {
         this.diaVencimento = diaVencimento;
         this.valor = valor;
@@ -12,13 +20,13 @@ public class Parcela extends BaseEntity {
     public Parcela() {
     }
 
-    private boolean foiPaga;
-    private int diaVencimento;
-    private double valor;
+    public int getIdParcela() {
+        return idParcela;
+    }
 
-    private int idVenda;
-    private Venda venda;
-
+    public void setIdParcela(int idParcela) {
+        this.idParcela = idParcela;
+    }
 
     public Venda getVenda() {
         return venda;

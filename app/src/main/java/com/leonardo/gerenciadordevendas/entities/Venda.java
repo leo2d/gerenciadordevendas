@@ -4,31 +4,26 @@ import java.util.List;
 
 public class Venda extends BaseEntity {
 
-
     private int idVenda;
-    private int idproduto;
-    private int idCliente;
+//    private int idproduto;
+//    private int idCliente;
     private boolean isParcelado;
     private int quantidadeParcelas;
 
     private List<Parcela>  parcelas;
-    private Produto produto;
-    private Cliente cliente;
+    private Produto produtoVenda;
+    private Cliente clienteVenda;
 
     public Venda() {
     }
 
-    public Venda(int idVenda, int idproduto, int idCliente,
-                 boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas,
-                 Produto produto, Cliente cliente) {
+    public Venda(int idVenda, boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas, Produto produtoVenda, Cliente clienteVenda) {
         this.idVenda = idVenda;
-        this.idproduto = idproduto;
-        this.idCliente = idCliente;
         this.isParcelado = isParcelado;
         this.quantidadeParcelas = quantidadeParcelas;
         this.parcelas = parcelas;
-        this.produto = produto;
-        this.cliente = cliente;
+        this.produtoVenda = produtoVenda;
+        this.clienteVenda = clienteVenda;
     }
 
     public void gerarParcelas(int diaVencimento) {
@@ -37,7 +32,7 @@ public class Venda extends BaseEntity {
     }
 
     private double calcularValorparcela() {
-        return produto.getPreco() / quantidadeParcelas;
+        return produtoVenda.getPreco() / quantidadeParcelas;
     }
 
     public double  calcularTotalDevedor() {
@@ -59,42 +54,6 @@ public class Venda extends BaseEntity {
         this.idVenda = idVenda;
     }
 
-    public int getIdproduto() {
-        return idproduto;
-    }
-
-    public void setIdproduto(int idproduto) {
-        this.idproduto = idproduto;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public void setParcelas(List<Parcela> parcelas) {
-        this.parcelas = parcelas;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
     public boolean isParcelado() {
         return isParcelado;
     }
@@ -113,5 +72,25 @@ public class Venda extends BaseEntity {
 
     public List<Parcela> getParcelas() {
         return parcelas;
+    }
+
+    public void setParcelas(List<Parcela> parcelas) {
+        this.parcelas = parcelas;
+    }
+
+    public Produto getProdutoVenda() {
+        return produtoVenda;
+    }
+
+    public void setProdutoVenda(Produto produtoVenda) {
+        this.produtoVenda = produtoVenda;
+    }
+
+    public Cliente getClienteVenda() {
+        return clienteVenda;
+    }
+
+    public void setClienteVenda(Cliente clienteVenda) {
+        this.clienteVenda = clienteVenda;
     }
 }

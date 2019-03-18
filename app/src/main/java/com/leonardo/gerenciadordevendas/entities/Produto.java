@@ -2,6 +2,11 @@ package com.leonardo.gerenciadordevendas.entities;
 
 public class Produto extends BaseEntity {
 
+    private int idProduto;
+    private String titulo;
+    private String descricao;
+    private double preco;
+
     public Produto() {
     }
 
@@ -11,11 +16,6 @@ public class Produto extends BaseEntity {
         this.descricao = descricao;
         this.preco = preco;
     }
-
-    private int idProduto;
-    private String titulo;
-    private String descricao;
-    private double preco;
 
     public int getIdProduto() {
         return idProduto;

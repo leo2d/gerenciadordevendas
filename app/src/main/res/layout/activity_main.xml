@@ -16,13 +16,13 @@
 
 
             <TextView
+                android:id="@+id/txtinicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textdash"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="10dp"
                 android:text="Por Daniel e Leonardo"
                 android:textColor="@android:color/background_light"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="62dp"
@@ -89,6 +89,7 @@
                 android:layout_marginRight="44dp"
                 android:layout_marginBottom="145dp"
                 android:background="@drawable/ic_exit"
+                android:onClick="sairApp"
                 android:text="Sair" />
 
             <TextView
@@ -130,20 +131,6 @@
                 android:layout_marginEnd="68dp"
                 android:layout_marginRight="68dp"
                 android:text="Produtos"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="586dp"
-                android:layout_marginEnd="87dp"
-                android:layout_marginRight="87dp"
-                android:text="Sair"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
 

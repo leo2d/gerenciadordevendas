@@ -11,54 +11,54 @@ public class DataBase extends SQLiteOpenHelper {
 
     //TABELA CLIENTE
 
-    private static final String TABELA_CLIENTE = "tbl_cliente";
+    public static final String TABELA_CLIENTE = "tbl_cliente";
 
-    private static final String ID_CLIENTE = "idCliente";
-    private static final String NOME_CLIENTE = "nomeCliente";
-    private static final String TELEFONE_CLIENTE = "telefoneCliente";
-    private static final String RG_CLIENTE = "rgCliente";
-    private static final String CPF_CLIENTE = "cpfCliente";
-    private static final String EMAIL_CLIENTE = "emailCliente";
+    public static final String ID_CLIENTE = "idCliente";
+    public static final String NOME_CLIENTE = "nomeCliente";
+    public static final String TELEFONE_CLIENTE = "telefoneCliente";
+    public static final String RG_CLIENTE = "rgCliente";
+    public static final String CPF_CLIENTE = "cpfCliente";
+    public static final String EMAIL_CLIENTE = "emailCliente";
     //ligação
-    private static final String ID_VENDA_CLIENTE = "idVendaCliente";
+    public static final String ID_VENDA_CLIENTE = "idVendaCliente";
 
     //-----------------------------------------------------------------------
 
     //TABELA PARCELA
-    private static final String TABELA_PARCELA = "tbl_parcela";
+    public static final String TABELA_PARCELA = "tbl_parcela";
 
-    private static final String ID_PARCELA = "idParcela";
-    private static final String FOI_PAGA_PARCELA = "foiPagaParcela";
-    private static final String DIA_VENCIMENTO_PARCELA = "diaVencimento";
-    private static final String VALOR_PARCELA = "valorParcela";
+    public static final String ID_PARCELA = "idParcela";
+    public static final String FOI_PAGA_PARCELA = "foiPagaParcela";
+    public static final String DIA_VENCIMENTO_PARCELA = "diaVencimento";
+    public static final String VALOR_PARCELA = "valorParcela";
     //ligação
-    private static final String ID_VENDA_PARCELA = "idVendaParcela";
+    public static final String ID_VENDA_PARCELA = "idVendaParcela";
 
 
     //-----------------------------------------------------------------------
 
     //TABELA PRODUTO
 
-    private static final String TABELA_PRODUTO = "tbl_produto";
+    public static final String TABELA_PRODUTO = "tbl_produto";
 
-    private static final String ID_PRODUTO = "idProduto";
-    private static final String TITULO_PRODUTO = "tituloProduto";
-    private static final String DESCRICAO_PRODUTO = "descricaoProduto";
-    private static final String PRECO_PRODUTO = "precoProduto";
+    public static final String ID_PRODUTO = "idProduto";
+    public static final String TITULO_PRODUTO = "tituloProduto";
+    public static final String DESCRICAO_PRODUTO = "descricaoProduto";
+    public static final String PRECO_PRODUTO = "precoProduto";
 
 
     //-----------------------------------------------------------------------
 
     //TABELA VENDA
 
-    private static final String TABELA_VENDA = "tbl_venda";
+    public static final String TABELA_VENDA = "tbl_venda";
 
-    private static final String ID_VENDA = "idVenda";
-    private static final String IS_PARCELADO_VENDA = "isParcelado";
-    private static final String QUANTIDADE_PARCELAS_VENDA = "quantidadeParcela";
+    public static final String ID_VENDA = "idVenda";
+    public static final String IS_PARCELADO_VENDA = "isParcelado";
+    public static final String QUANTIDADE_PARCELAS_VENDA = "quantidadeParcela";
     //ligação
-    private static final String ID_PRODUTO_VENDA = "idProdutovenda";
-    private static final String ID_CLIENTE_VENDA = "iClienteVenda";
+    public static final String ID_PRODUTO_VENDA = "idProdutovenda";
+    public static final String ID_CLIENTE_VENDA = "iClienteVenda";
 
 
     public DataBase(Context context) {

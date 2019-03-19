@@ -8,10 +8,12 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int TELA_CADASTRO_CLIENTE = 1;
+    private static final int TELA_LISTA_CLIENTES = 2;
+
     Button btn_cadastrar_cliente,
             btn_produtos,btn_vendas,
             btn_sair_app, btn_lista_de_clientes;
-    public static final int TELA_CADASTRO_CLIENTE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent itn = new Intent(getApplicationContext(), CadastroDeClientesActivity.class);
                 startActivityForResult(itn, TELA_CADASTRO_CLIENTE);
+            }
+        });
+
+        btn_lista_de_clientes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itn = new Intent(getApplicationContext(), ListaDeClientesActivity.class);
+                startActivityForResult(itn, TELA_LISTA_CLIENTES);
+            }
+        });
+
+        btn_sair_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.leonardo.gerenciadordevendas.DAO.ClienteDAO;
+import com.leonardo.gerenciadordevendas.entities.Cliente;
+
 public class CadastroDeClientesActivity extends AppCompatActivity {
 
     private static final String TELA_CADASTRO_CLIENTES = "Cadastro de Clientes";
@@ -37,11 +40,21 @@ public class CadastroDeClientesActivity extends AppCompatActivity {
             //preciso passar todos os atributos dele
             //Direto do construtor
 
+            Cliente cliente = new Cliente(1, campo_nome_cliente.getText().toString(),
+                    campo_telefone_cliente.getText().toString(), campo_cpf_cliente.getText().toString(),
+                    campo_rg_cliente.getText().toString(), campo_email_cliente.getText().toString());
+
+
+            ClienteDAO clienteDAO = new ClienteDAO(getApplicationContext());
+            clienteDAO.open();
+            clienteDAO.gravarCliente(cliente);
+            clienteDAO.close();
             finish();
 
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void binding() {
 

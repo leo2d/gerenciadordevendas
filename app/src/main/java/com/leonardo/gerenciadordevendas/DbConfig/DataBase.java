@@ -20,7 +20,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String CPF_CLIENTE = "cpfCliente";
     public static final String EMAIL_CLIENTE = "emailCliente";
     //ligação
-    public static final String ID_VENDA_CLIENTE = "idVendaCliente";
+    //public static final String ID_VENDA_CLIENTE = "idVendaCliente";
 
     //-----------------------------------------------------------------------
 
@@ -45,6 +45,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TITULO_PRODUTO = "tituloProduto";
     public static final String DESCRICAO_PRODUTO = "descricaoProduto";
     public static final String PRECO_PRODUTO = "precoProduto";
+    public static final String ID_CATEGORIA_PTODUTO = "IdCategoria_produto";
 
 
     //-----------------------------------------------------------------------
@@ -59,6 +60,16 @@ public class DataBase extends SQLiteOpenHelper {
     //ligação
     public static final String ID_PRODUTO_VENDA = "idProdutovenda";
     public static final String ID_CLIENTE_VENDA = "iClienteVenda";
+
+
+    //-----------------------------------------------------------------------
+
+    //TABELA CATEGORIA
+
+    public static final String TABELA_CATEGORIA = "tbl_categoria";
+
+    public static final String ID_CATEGORIA = "idCategoria";
+    public static final String NOME_CATEGORIA = "nomeCategoria";
 
 
     public DataBase(Context context) {
@@ -89,7 +100,8 @@ public class DataBase extends SQLiteOpenHelper {
             ID_PRODUTO + " integer primary key autoincrement," +
             TITULO_PRODUTO + " text not null," +
             DESCRICAO_PRODUTO + " text not null," +
-            PRECO_PRODUTO + " text not null " +
+            PRECO_PRODUTO + " text not null, " +
+            ID_CATEGORIA_PTODUTO + " integer " +
             ");";
 
     String tblVenda = "CREATE TABLE " + TABELA_VENDA + " (" +
@@ -101,6 +113,16 @@ public class DataBase extends SQLiteOpenHelper {
             ");";
 
 
+    String tblCategoria = "CREATE TABLE " + TABELA_CATEGORIA + " (" +
+            ID_CATEGORIA + " integer primary key autoincrement," +
+            NOME_CATEGORIA + " text not null" +
+            ");";
+
+
+    String insertCategoria = "INSERT INTO "+DataBase.TABELA_CATEGORIA+" (" +
+            " "+DataBase.ID_CATEGORIA+", "+DataBase.NOME_CATEGORIA+" ) " +
+            " VALUES (1, 'Roupa'), (2, 'Calçados'), (3, 'Bermudas');";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -108,6 +130,9 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(tblParcela);
         db.execSQL(tblProduto);
         db.execSQL(tblVenda);
+        db.execSQL(tblCategoria);
+
+        db.execSQL(insertCategoria);
     }
 
     @Override
@@ -116,6 +141,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL("drop table " + TABELA_PARCELA);
         db.execSQL("drop table " + TABELA_PRODUTO);
         db.execSQL("drop table " + TABELA_VENDA);
+        db.execSQL("drop table " + TABELA_CATEGORIA);
         onCreate(db);
     }
 }

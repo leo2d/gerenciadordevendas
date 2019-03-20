@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/listaDeClientes"
+            android:id="@+id/listaDeProdutos"
             android:layout_width="match_parent"
             android:layout_height="327dp" />
 
@@ -20,7 +20,7 @@
             android:layout_weight="0">
 
             <Button
-                android:id="@+id/btnVoltar"
+                android:id="@+id/btnVoltarListaProduto"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"

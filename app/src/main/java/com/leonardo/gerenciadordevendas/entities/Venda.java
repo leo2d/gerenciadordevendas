@@ -1,15 +1,13 @@
 package com.leonardo.gerenciadordevendas.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Venda extends BaseEntity {
+public class Venda extends BaseEntity  implements Serializable {
 
     private int idVenda;
-//    private int idproduto;
-//    private int idCliente;
     private boolean isParcelado;
     private int quantidadeParcelas;
-
     private List<Parcela>  parcelas;
     private Produto produtoVenda;
     private Cliente clienteVenda;

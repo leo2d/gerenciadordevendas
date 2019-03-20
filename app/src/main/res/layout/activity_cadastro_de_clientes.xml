@@ -14,7 +14,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="67dp" />
+            android:layout_height="36dp" />
 
         <EditText
             android:id="@+id/campoNomeClienteCadastro"
@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="Nome"
-            android:inputType="textCapWords" />
-
+            android:inputType="textCapWords"
+            android:textColor="@android:color/background_dark" />
 
 
         <EditText
@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="Telefone"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="@android:color/background_dark" />
 
 
         <EditText
@@ -41,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="CPF"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@android:color/background_dark" />
 
         <EditText
             android:id="@+id/campoRgClienteCadastro"
@@ -49,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="RG"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@android:color/background_dark" />
 
         <EditText
             android:id="@+id/campoEmailClienteCadastro"
@@ -57,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
 

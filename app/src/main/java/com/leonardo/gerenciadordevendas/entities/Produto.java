@@ -1,20 +1,32 @@
 package com.leonardo.gerenciadordevendas.entities;
 
-public class Produto extends BaseEntity {
+import java.io.Serializable;
+
+public class Produto extends BaseEntity implements Serializable {
 
     private int idProduto;
     private String titulo;
     private String descricao;
     private double preco;
+    private Categoria produtoCategoria;
 
     public Produto() {
     }
 
-    public Produto(int idProduto, String titulo, String descricao, double preco) {
+    public Produto(int idProduto, String titulo, String descricao, double preco, Categoria produtoCategoria) {
         this.idProduto = idProduto;
         this.titulo = titulo;
         this.descricao = descricao;
         this.preco = preco;
+        this.produtoCategoria = produtoCategoria;
+    }
+
+    public Categoria getProdutoCategoria() {
+        return produtoCategoria;
+    }
+
+    public void setProdutoCategoria(Categoria produtoCategoria) {
+        this.produtoCategoria = produtoCategoria;
     }
 
     public int getIdProduto() {

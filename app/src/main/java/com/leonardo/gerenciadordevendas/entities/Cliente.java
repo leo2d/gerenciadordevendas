@@ -1,8 +1,9 @@
 package com.leonardo.gerenciadordevendas.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Cliente extends BaseEntity {
+public class Cliente extends BaseEntity implements Serializable {
 
     private int id;
     private String nome;

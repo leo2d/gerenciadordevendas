@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListaDeClientesActivity"></activity>
+        <activity android:name=".TelaListaProdutoActivity"></activity>
+        <activity android:name=".TelaCadastroProdutoActivity" />
+        <activity android:name=".TelaProdutosActivity" />
+        <activity android:name=".ListaDeClientesActivity" />
         <activity android:name=".CadastroDeClientesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

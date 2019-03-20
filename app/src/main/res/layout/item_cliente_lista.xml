@@ -16,6 +16,7 @@
             android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textColor="@android:color/background_dark"
             android:textSize="20sp"
             tools:text="Cliente" />
 
@@ -24,6 +25,7 @@
             android:layout_width="399dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textColor="@android:color/background_dark"
             android:textSize="18sp"
             tools:text="Email" />
 

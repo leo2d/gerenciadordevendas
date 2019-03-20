@@ -1,23 +1,44 @@
 package com.leonardo.gerenciadordevendas.entities;
 
-public class Parcela extends BaseEntity {
+import java.io.Serializable;
+
+public class Parcela extends BaseEntity implements Serializable {
 
     private int idParcela;
     private boolean foiPaga;
-    private int diaVencimento;
+    private String diaVencimento;
     private double valor;
-
-    private int idVenda;
-    private Venda venda;
-
-    public Parcela(int diaVencimento, double valor, int idVenda) {
-        this.diaVencimento = diaVencimento;
-        this.valor = valor;
-        this.idVenda = idVenda;
-        this.foiPaga = false;
-    }
+    private Venda parcelaVenda;
 
     public Parcela() {
+    }
+
+    public Parcela(int idParcela, boolean foiPaga, String diaVencimento, double valor, Venda parcelaVenda) {
+        this.idParcela = idParcela;
+        this.foiPaga = foiPaga;
+        this.diaVencimento = diaVencimento;
+        this.valor = valor;
+        this.parcelaVenda = parcelaVenda;
+    }
+
+    public Parcela(int diaVencimento, double calcularValorparcela, int id) {
+        super();
+    }
+
+    public String getDiaVencimento() {
+        return diaVencimento;
+    }
+
+    public void setDiaVencimento(String diaVencimento) {
+        this.diaVencimento = diaVencimento;
+    }
+
+    public Venda getParcelaVenda() {
+        return parcelaVenda;
+    }
+
+    public void setParcelaVenda(Venda parcelaVenda) {
+        this.parcelaVenda = parcelaVenda;
     }
 
     public int getIdParcela() {
@@ -28,13 +49,6 @@ public class Parcela extends BaseEntity {
         this.idParcela = idParcela;
     }
 
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
 
     public boolean isFoiPaga() {
         return foiPaga;
@@ -44,13 +58,6 @@ public class Parcela extends BaseEntity {
         this.foiPaga = foiPaga;
     }
 
-    public int getDiaVencimento() {
-        return diaVencimento;
-    }
-
-    public void setDiaVencimento(int diaVencimento) {
-        this.diaVencimento = diaVencimento;
-    }
 
     public double getValor() {
         return valor;
@@ -60,11 +67,5 @@ public class Parcela extends BaseEntity {
         this.valor = valor;
     }
 
-    public int getIdVenda() {
-        return idVenda;
-    }
 
-    public void setIdVenda(int idVenda) {
-        this.idVenda = idVenda;
-    }
 }

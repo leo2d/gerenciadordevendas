@@ -44,4 +44,19 @@ public class CategoriaDAO {
         }
         return categorias;
     }
+
+    public Categoria findById(int id) {
+        // faz o select para procurar todos pelo ID
+
+        String selectUsuario = "SELECT * FROM " + DataBase.TABELA_CATEGORIA + " WHERE " + DataBase.ID_CATEGORIA + "==" + id + ";";
+        Cursor cursor = conexao.rawQuery(selectUsuario, null);
+
+        Categoria categoria = new Categoria();
+
+        //Percorre cada atributo de usuario
+        if (cursor.moveToNext()) {
+            categoria.setNome(cursor.getString(cursor.getColumnIndex(DataBase.NOME_CATEGORIA)));
+        }
+        return categoria;
+    }
 }

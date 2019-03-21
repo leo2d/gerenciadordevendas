@@ -45,7 +45,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TITULO_PRODUTO = "tituloProduto";
     public static final String DESCRICAO_PRODUTO = "descricaoProduto";
     public static final String PRECO_PRODUTO = "precoProduto";
-    public static final String ID_CATEGORIA_PTODUTO = "IdCategoria_produto";
+    public static final String ID_CATEGORIA_PRODUTO = "IdCategoria_produto";
 
 
     //-----------------------------------------------------------------------
@@ -101,7 +101,7 @@ public class DataBase extends SQLiteOpenHelper {
             TITULO_PRODUTO + " text not null," +
             DESCRICAO_PRODUTO + " text not null," +
             PRECO_PRODUTO + " text not null, " +
-            ID_CATEGORIA_PTODUTO + " integer " +
+            ID_CATEGORIA_PRODUTO + " integer " +
             ");";
 
     String tblVenda = "CREATE TABLE " + TABELA_VENDA + " (" +
@@ -119,9 +119,10 @@ public class DataBase extends SQLiteOpenHelper {
             ");";
 
 
-    String insertCategoria = "INSERT INTO "+DataBase.TABELA_CATEGORIA+" (" +
-            " "+DataBase.ID_CATEGORIA+", "+DataBase.NOME_CATEGORIA+" ) " +
-            " VALUES (1, 'Roupa'), (2, 'Calçados'), (3, 'Bermudas');";
+    String insertCategoria = "INSERT INTO " + DataBase.TABELA_CATEGORIA + " (" +
+            " " + DataBase.ID_CATEGORIA + ", " + DataBase.NOME_CATEGORIA + " ) " +
+            " VALUES (1, 'Fonte'), (2, 'Memoria RAM'), (3, 'Processador'), (4, 'Gabinete'), " +
+            "(5, 'Placa de Video'), (6,'Placa Mae'), (7, 'Perifericos'), (8,'Disco Rigido');";
 
     @Override
     public void onCreate(SQLiteDatabase db) {

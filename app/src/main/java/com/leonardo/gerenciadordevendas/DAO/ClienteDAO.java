@@ -52,15 +52,17 @@ public class ClienteDAO {
         // Pois enquanto tiver usuarios na lista eu vou percorrer
         ArrayList<Cliente> clientes = new ArrayList<>();
 
+        // cargo.setId(c.getInt(c.getColumnIndex(DataBase.FIELD_CARGO_ID)));
+
         while (cursor.moveToNext()) {
             Cliente cliente = new Cliente();
             //Preciso pegar o Id do usuario aqui
-            cliente.setId(cursor.getInt(0));
-            cliente.setNome(cursor.getString(1));
-            cliente.setTelefone(cursor.getString(2));
-            cliente.setRG(cursor.getString(3));
-            cliente.setCPF(cursor.getString(4));
-            cliente.setEmail(cursor.getString(5));
+            cliente.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CLIENTE)));
+            cliente.setNome(cursor.getString(cursor.getColumnIndex(DataBase.NOME_CLIENTE)));
+            cliente.setTelefone(cursor.getString(cursor.getColumnIndex(DataBase.TELEFONE_CLIENTE)));
+            cliente.setRG(cursor.getString(cursor.getColumnIndex(DataBase.RG_CLIENTE)));
+            cliente.setCPF(cursor.getString(cursor.getColumnIndex(DataBase.CPF_CLIENTE)));
+            cliente.setEmail(cursor.getString(cursor.getColumnIndex(DataBase.EMAIL_CLIENTE)));
             clientes.add(cliente);
         }
 

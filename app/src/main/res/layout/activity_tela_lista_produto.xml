@@ -21,28 +21,13 @@
 
             <Button
                 android:id="@+id/btnVoltarListaProduto"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="87dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/ic_previous" />
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_back" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnVoltarListaProduto"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="151dp"
-                android:layout_marginLeft="151dp"
-                android:layout_marginTop="26dp"
-                android:layout_marginBottom="31dp"
-                android:text="Voltar"
-                android:textSize="21sp"
-                android:textStyle="bold" />
         </RelativeLayout>
 
     </LinearLayout>

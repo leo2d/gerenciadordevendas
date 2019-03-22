@@ -1,14 +1,18 @@
 package com.leonardo.gerenciadordevendas;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.leonardo.gerenciadordevendas.Adapter.ListaDeClientesAdapter;
 import com.leonardo.gerenciadordevendas.DAO.ClienteDAO;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
+import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
 
 import java.util.List;
 
@@ -19,11 +23,11 @@ public class ListaDeClientesActivity extends AppCompatActivity {
     Button btn_voltar;
     ListView lista_de_clientes;
     List<Cliente> clientes;
-    final int TELA_PRODUTOS_CLIENTES = 1;
+    final int TELA_CADASTRO_VENDAS = 1;
     private ListaDeClientesAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_clientes);
         setTitle(TELA_LISTA_CLIENTES);
@@ -35,6 +39,15 @@ public class ListaDeClientesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        lista_de_clientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent vaiParaTeladeVendas = new Intent(getApplicationContext(), TelaCadastroDeVendasActivity.class);
+                vaiParaTeladeVendas.putExtra(CHAVE_CLIENTE, clientes.get(position));
+                startActivityForResult(vaiParaTeladeVendas, TELA_CADASTRO_VENDAS);
             }
         });
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leonardo.gerenciadordevendas.R;
@@ -53,7 +54,24 @@ public class ListaDeProdutosAdapter extends BaseAdapter {
         TextView preco = viewProduto.findViewById(R.id.item_produto_valor);
         preco.setText(String.valueOf(produtoDevolvido.getPreco()));
 
+        int img1 = 0;
+        img1 = Imagem(produtoDevolvido.getId(), img1);
+
+        ImageView img;
+        img = viewProduto.findViewById(R.id.imgProduto);
+        img.setImageResource(img1);
 
         return viewProduto;
+    }
+
+    private int Imagem(int i, int img1)
+    {
+        switch (i){
+            case 1:
+                img1 = R.drawable.ic_shopping_bag;
+                break;
+
+        }
+        return img1;
     }
 }

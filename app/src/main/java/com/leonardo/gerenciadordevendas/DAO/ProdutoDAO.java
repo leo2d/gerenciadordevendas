@@ -84,14 +84,14 @@ public class ProdutoDAO {
             while (cursor.moveToNext()) {
 
                 Categoria categoria = new Categoria();
-                categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CATEGORIA)));
+                categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO)));
 
                 Produto produto = new Produto();
-                produto.setProdutoCategoria(categoria);
                 produto.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO)));
                 produto.setTitulo(cursor.getString(cursor.getColumnIndex(DataBase.TITULO_PRODUTO)));
                 produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
                 produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
+                produto.setProdutoCategoria(categoria);
                 produtos.add(produto);
             }
 

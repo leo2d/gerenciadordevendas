@@ -6,6 +6,7 @@ import java.util.List;
 public class Venda extends BaseEntity  implements Serializable {
 
     private int idVenda;
+    private String dataVenda;
     private boolean isParcelado;
     private int quantidadeParcelas;
     private List<Parcela>  parcelas;
@@ -15,8 +16,9 @@ public class Venda extends BaseEntity  implements Serializable {
     public Venda() {
     }
 
-    public Venda(int idVenda, boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas, Produto produtoVenda, Cliente clienteVenda) {
+    public Venda(int idVenda, String dataVenda, boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas, Produto produtoVenda, Cliente clienteVenda) {
         this.idVenda = idVenda;
+        this.dataVenda = dataVenda;
         this.isParcelado = isParcelado;
         this.quantidadeParcelas = quantidadeParcelas;
         this.parcelas = parcelas;
@@ -42,6 +44,14 @@ public class Venda extends BaseEntity  implements Serializable {
             }
 
         return resultado;
+    }
+
+    public String getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(String dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
     public int getIdVenda() {

@@ -1,9 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TelaCadastroDeVendasActivity">
 
-</android.support.constraint.ConstraintLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="730dp"
+    android:background="@drawable/fundo">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="730dp"
+        android:orientation="vertical">
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="38dp" />
+
+        <EditText
+            android:id="@+id/campoDataVenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Data da Venda"
+            android:inputType="date"
+            android:textColor="@android:color/background_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
+            <TextView
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:text="Produto"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerProduto"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
+            <Switch
+                android:id="@+id/switch1Parcela"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:text="Parcelado" />
+
+            <Spinner
+                android:id="@+id/spinnerParcela"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/campoDescricaoProdutoCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Descrição"
+            android:inputType="textCapWords"
+            android:textColor="@android:color/background_dark" />
+
+
+        <EditText
+            android:id="@+id/campoPrecoProdutoCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Preço"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/background_dark" />
+
+
+
+
+    </LinearLayout>
+
+</ScrollView>

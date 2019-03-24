@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.leonardo.gerenciadordevendas.Adapter.ListaDeClientesAdapter;
@@ -20,7 +21,6 @@ public class ListaDeClientesActivity extends AppCompatActivity {
 
     private static final String TELA_LISTA_CLIENTES = "Lista de Clientes";
 
-    Button btn_voltar;
     ListView lista_de_clientes;
     List<Cliente> clientes;
     final int TELA_CADASTRO_VENDAS = 1;
@@ -35,13 +35,6 @@ public class ListaDeClientesActivity extends AppCompatActivity {
         binding();
         preencheLista();
 
-        btn_voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         lista_de_clientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -52,8 +45,23 @@ public class ListaDeClientesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_btn_voltar_telas, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int itemId = item.getItemId();
+        if (itemId == R.id.btn_voltar_menu_lista_produto) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void binding() {
-        btn_voltar = findViewById(R.id.btnVoltar);
         lista_de_clientes =  findViewById(R.id.listaDeClientes);
     }
 

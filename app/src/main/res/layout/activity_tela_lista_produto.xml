@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@android:style/Widget.DeviceDefault.ScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:scrollbarStyle="insideInset">
@@ -14,24 +14,8 @@
         <ListView
             android:id="@+id/listaDeProdutos"
             android:layout_width="match_parent"
-            android:layout_height="800dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="126dp"
-            android:layout_weight="0">
-
-            <Button
-                android:id="@+id/btnVoltarListaProduto"
-                android:layout_width="wrap_content"
-                android:layout_height="87dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/ic_back" />
-
-        </RelativeLayout>
-
+            android:layout_height="800dp"
+            android:layout_weight="0" />
     </LinearLayout>
 
 </ScrollView>

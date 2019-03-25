@@ -55,6 +55,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TABELA_VENDA = "tbl_venda";
 
     public static final String ID_VENDA = "idVenda";
+    public static final String DATA_VENDA = "dataVenda";
     public static final String IS_PARCELADO_VENDA = "isParcelado";
     public static final String QUANTIDADE_PARCELAS_VENDA = "quantidadeParcela";
     //ligação
@@ -107,6 +108,7 @@ public class DataBase extends SQLiteOpenHelper {
     String tblVenda = "CREATE TABLE " + TABELA_VENDA + " (" +
             ID_VENDA + " integer primary key autoincrement," +
             IS_PARCELADO_VENDA + " text not null," +
+            DATA_VENDA + " text not null," +
             QUANTIDADE_PARCELAS_VENDA + " text not null," +
             ID_PRODUTO_VENDA + " integer, " +
             ID_CLIENTE_VENDA + " integer " +

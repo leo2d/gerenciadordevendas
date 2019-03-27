@@ -107,10 +107,10 @@ public class DataBase extends SQLiteOpenHelper {
 
     String tblVenda = "CREATE TABLE " + TABELA_VENDA + " (" +
             ID_VENDA + " integer primary key autoincrement," +
-            IS_PARCELADO_VENDA + " text not null," +
             DATA_VENDA + " text not null," +
-            QUANTIDADE_PARCELAS_VENDA + " text not null," +
             ID_PRODUTO_VENDA + " integer, " +
+            IS_PARCELADO_VENDA + " text not null," +
+            QUANTIDADE_PARCELAS_VENDA + " text not null," +
             ID_CLIENTE_VENDA + " integer " +
             ");";
 

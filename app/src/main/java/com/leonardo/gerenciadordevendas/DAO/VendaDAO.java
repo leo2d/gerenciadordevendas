@@ -35,6 +35,11 @@ public class VendaDAO {
             open();
 
             ContentValues cv = new ContentValues();
+            cv.put(DataBase.DATA_VENDA, venda.getDataVenda());
+            cv.put(DataBase.ID_PRODUTO_VENDA, venda.getProdutoVenda().getId());
+            cv.put(DataBase.IS_PARCELADO_VENDA, venda.isParcelado() ? 1 : 0);
+            cv.put(DataBase.QUANTIDADE_PARCELAS_VENDA, venda.getQuantidadeParcelas());
+            cv.put(DataBase.ID_CLIENTE_VENDA, venda.getClienteVenda().getId());
 
 
         } finally {
@@ -43,6 +48,13 @@ public class VendaDAO {
     }
 
     public List<Venda> findAll() {
-        return null;
+
+        try {
+            open();
+
+            return null;
+        } finally {
+            close();
+        }
     }
 }

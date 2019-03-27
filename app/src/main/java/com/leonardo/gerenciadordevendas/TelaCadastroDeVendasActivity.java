@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -45,16 +46,16 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         Integer[] parcela = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.layout_spinner_parcelas, parcela);
         spinnerParcela.setAdapter(adapter);
+
+        spinnerParcela.setEnabled(false);
+
+        switchParcela.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                spinnerParcela.setEnabled(switchParcela.isChecked());
+            }
+        });
     }
-
-
-//    public void verificaSwtch() {
-//        if (switchParcela.isChecked()) {
-//            spinnerParcela.setVisibility(View.GONE);
-//        } else {
-//            spinnerParcela.setVisibility(View.INVISIBLE);
-//        }
-//    }
 
 
     @Override

@@ -31,8 +31,17 @@ public class Venda extends BaseEntity  implements Serializable {
             this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(), this.getId()));
     }
 
+    public void gerarParcelas(int diaVencimento, double valorProduto) {
+        for (int i = 0; i < quantidadeParcelas; i++)
+            this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(), this.getId()));
+    }
+
     private double calcularValorparcela() {
         return produtoVenda.getPreco() / quantidadeParcelas;
+    }
+
+    private double calcularValorparcela(double valorProduto) {
+        return valorProduto / quantidadeParcelas;
     }
 
     public double  calcularTotalDevedor() {

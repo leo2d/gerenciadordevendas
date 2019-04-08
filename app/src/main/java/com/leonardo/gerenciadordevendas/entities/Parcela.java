@@ -35,6 +35,7 @@ public class Parcela extends BaseEntity implements Serializable {
 
     public void setIndicadorPagamento(int indicadorPagamento) {
         this.indicadorPagamento = indicadorPagamento;
+        this.setFoiPaga(indicadorPagamento == 0 ? false : true);
     }
 
     public int getIdVenda() {

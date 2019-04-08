@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,20 +16,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 
+import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ProdutoDAO;
+import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
 import com.leonardo.gerenciadordevendas.entities.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
 
@@ -37,6 +31,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     public static final String TELA_CADASTRO_VENDAS = "Cadastro de Vendas";
     public Cliente idCliente;
 
+    Button buttonSave;
     TextView labelParcelas;
     EditText valorParcela;
     EditText valorVenda;
@@ -63,6 +58,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
         venda = new Venda();
         venda.setClienteVenda(idCliente);
+        venda.setIdCliente(idCliente.getId());
 
         //Generico, nao vindo do banco.
         final Integer[] parcela = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -78,57 +74,22 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             }
         });
 
-        try {
+        spinnerProduto.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                atualizarValores();
+            }
 
-            spinnerProduto.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
-                    valorVenda.setText(selecionado.getPreco() + "");
-
-                /*    Produto test = new Produto();
-                    test.setId(selecionado.getId());
-                    test.setPreco(selecionado.getPreco());
-                    test.setDescricao(selecionado.getDescricao());
-                    test.setTitulo(selecionado.getTitulo());*/
-
-                    // venda.setProdutoVenda(test);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }
-
-            });
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
 
         spinnerParcela.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                venda.setParcelas(new ArrayList<Parcela>());
-                int quantidadeParcelas = (int) spinnerParcela.getSelectedItem();
-
-                venda.setQuantidadeParcelas(quantidadeParcelas);
-                Parcela parcelabase = null;
-
-                Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
-
-                int dia = 07; //TODO ; arrumar isso aqui
-                venda.gerarParcelas(dia, selecionado.getPreco());
-
-                for (Parcela p : venda.getParcelas()) {
-                    parcelabase = p;
-                    break;
-                }
-
-                String temp = "R$ " + parcelabase.getValor();
-                temp = temp.replace(".", ",");
-                valorParcela.setText(temp);
-                labelParcelas.setText(quantidadeParcelas + " x");
+                atualizarValores();
             }
 
             @Override
@@ -136,6 +97,14 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
                 // your code here
             }
 
+        });
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ValidarCamposObrigatorios())
+                    salvarVenda();
+            }
         });
     }
 
@@ -157,6 +126,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     }
 
     private void binding() {
+        buttonSave = findViewById(R.id.buttonSave);
         labelParcelas = findViewById(R.id.labelParcelas);
         valorParcela = findViewById(R.id.valorParcelado);
         valorVenda = findViewById(R.id.valorVenda);
@@ -166,6 +136,12 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerProduto = findViewById(R.id.spinnerProduto);
     }
 
+    private boolean ValidarCamposObrigatorios(){
+        if(campoDataVenda.getText().toString().isEmpty() || campoDataVenda.getText() == null)
+            return false;
+
+        return true;
+    }
     public void preencheSpinnerProdutos() {
 
         ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
@@ -183,5 +159,45 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     }
 
+    private void salvarVenda() {
+        venda.setDataVenda(campoDataVenda.getText().toString());
+
+        try {
+            VendaDAO vendaDAO = new VendaDAO(getApplicationContext());
+            vendaDAO.gravarVenda(venda);
+
+            ParcelaDAO parcelaDAO = new ParcelaDAO(getApplicationContext());
+            parcelaDAO.gravarParcelas(venda.getParcelas());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private void atualizarValores() {
+        venda.setParcelas(new ArrayList<Parcela>());
+
+        int quantidadeParcelas = (int) spinnerParcela.getSelectedItem();
+
+        venda.setQuantidadeParcelas(quantidadeParcelas);
+        Parcela parcelabase = null;
+
+        Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
+
+        int dia = 07; //TODO ; arrumar isso aqui
+        venda.gerarParcelas(dia, selecionado.getPreco());
+        venda.setIdProduto(selecionado.getId());
+
+        for (Parcela p : venda.getParcelas()) {
+            parcelabase = p;
+            break;
+        }
+
+        String temp = "R$ " + parcelabase.getValor();
+        temp = temp.replace(".", ",");
+        valorParcela.setText(temp);
+        labelParcelas.setText(quantidadeParcelas + " x");
+
+        valorVenda.setText(selecionado.getPreco() + "");
+    }
 
 }

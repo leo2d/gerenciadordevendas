@@ -11,6 +11,8 @@ public class Venda extends BaseEntity  implements Serializable {
     private boolean isParcelado;
     private int quantidadeParcelas;
     private List<Parcela>  parcelas;
+    private int idProduto;
+    private int idCliente;
     private Produto produtoVenda;
     private Cliente clienteVenda;
 
@@ -56,6 +58,22 @@ public class Venda extends BaseEntity  implements Serializable {
             }
 
         return resultado;
+    }
+
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getDataVenda() {

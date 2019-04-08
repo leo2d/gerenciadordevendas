@@ -20,6 +20,7 @@ import com.leonardo.gerenciadordevendas.entities.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.text.DateFormat;
@@ -77,47 +78,46 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             }
         });
 
-       try{
+        try {
 
-           spinnerProduto.setOnItemSelectedListener(new OnItemSelectedListener() {
-               @Override
-               public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                   Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
-                   valorVenda.setText(selecionado.getPreco() + "");
+            spinnerProduto.setOnItemSelectedListener(new OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
+                    valorVenda.setText(selecionado.getPreco() + "");
 
-                   Produto test = new Produto();
-                   test.setId(selecionado.getId());
-                   test.setPreco(selecionado.getPreco());
-                   test.setDescricao(selecionado.getDescricao());
-                   test.setTitulo(selecionado.getTitulo());
+                /*    Produto test = new Produto();
+                    test.setId(selecionado.getId());
+                    test.setPreco(selecionado.getPreco());
+                    test.setDescricao(selecionado.getDescricao());
+                    test.setTitulo(selecionado.getTitulo());*/
 
-                  // venda.setProdutoVenda(test);
-               }
+                    // venda.setProdutoVenda(test);
+                }
 
-               @Override
-               public void onNothingSelected(AdapterView<?> parentView) {
-                   // your code here
-               }
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
 
-           });
+            });
 
-       }catch (Exception ex){
-           System.out.println(ex.getMessage());
-       }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
         spinnerParcela.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                venda.setParcelas(new ArrayList<Parcela>());
                 int quantidadeParcelas = (int) spinnerParcela.getSelectedItem();
-                int dia = Calendar.getInstance().getTime().getDay();
-
 
                 venda.setQuantidadeParcelas(quantidadeParcelas);
                 Parcela parcelabase = null;
 
-
-
                 Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
+
+                int dia = 07; //TODO ; arrumar isso aqui
                 venda.gerarParcelas(dia, selecionado.getPreco());
 
                 for (Parcela p : venda.getParcelas()) {
@@ -125,7 +125,9 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
                     break;
                 }
 
-                valorParcela.setText(parcelabase.getValor() + "");
+                String temp = "R$ " + parcelabase.getValor();
+                temp = temp.replace(".", ",");
+                valorParcela.setText(temp);
                 labelParcelas.setText(quantidadeParcelas + " x");
             }
 
@@ -136,7 +138,6 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

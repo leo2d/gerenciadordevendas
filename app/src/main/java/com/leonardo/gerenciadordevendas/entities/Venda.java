@@ -1,6 +1,7 @@
 package com.leonardo.gerenciadordevendas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Venda extends BaseEntity  implements Serializable {
@@ -14,9 +15,11 @@ public class Venda extends BaseEntity  implements Serializable {
     private Cliente clienteVenda;
 
     public Venda() {
+        this.parcelas = new ArrayList<Parcela>();
     }
 
     public Venda(int idVenda, String dataVenda, boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas, Produto produtoVenda, Cliente clienteVenda) {
+        this.parcelas = new ArrayList<Parcela>();
         this.idVenda = idVenda;
         this.dataVenda = dataVenda;
         this.isParcelado = isParcelado;
@@ -33,7 +36,7 @@ public class Venda extends BaseEntity  implements Serializable {
 
     public void gerarParcelas(int diaVencimento, double valorProduto) {
         for (int i = 0; i < quantidadeParcelas; i++)
-            this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(), this.getId()));
+            this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(valorProduto), this.getId()));
     }
 
     private double calcularValorparcela() {

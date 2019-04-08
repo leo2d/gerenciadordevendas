@@ -27,12 +27,12 @@ public class DataBase extends SQLiteOpenHelper {
     //TABELA PARCELA
     public static final String TABELA_PARCELA = "tbl_parcela";
 
-    public static final String ID_PARCELA = "idParcela";
-    public static final String FOI_PAGA_PARCELA = "foiPagaParcela";
+    public static final String ID_PARCELA = "id";
+    public static final String FOI_PAGA_PARCELA = "indicadorPagamento";
     public static final String DIA_VENCIMENTO_PARCELA = "diaVencimento";
     public static final String VALOR_PARCELA = "valorParcela";
     //ligação
-    public static final String ID_VENDA_PARCELA = "idVendaParcela";
+    public static final String ID_VENDA_PARCELA = "idVenda";
 
 
     //-----------------------------------------------------------------------
@@ -90,7 +90,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     String tblParcela = "CREATE TABLE " + TABELA_PARCELA + " (" +
             ID_PARCELA + " integer primary key autoincrement," +
-            FOI_PAGA_PARCELA + " text not null," +
+            FOI_PAGA_PARCELA + " integer not null," +
             DIA_VENCIMENTO_PARCELA + " text not null," +
             VALOR_PARCELA + " text not null," +
             ID_VENDA_PARCELA + " integer " +

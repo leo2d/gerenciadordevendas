@@ -36,7 +36,7 @@ public class ProdutoDAO {
         String insertCorrida = "insert into " + DataBase.TABELA_PRODUTO + " ( " + DataBase.TITULO_PRODUTO + ", " +
                 "" + DataBase.DESCRICAO_PRODUTO + ", " + DataBase.PRECO_PRODUTO + ", " + DataBase.ID_CATEGORIA_PRODUTO + ")"
                 + " values ('" + produto.getTitulo() + "', '" + produto.getDescricao() + "', '" + produto.getPreco() + "', '"
-                + produto.getProdutoCategoria().getIdCategoria() + "');";
+                + produto.getIdCategoria() + "');";
 
         conexao.execSQL(insertCorrida);
 
@@ -57,12 +57,13 @@ public class ProdutoDAO {
             produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
             produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
             //PARA PEGAR O ID
-            int idCategoria = cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO);
+            produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));
+   /*         int idCategoria = cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO);
             CategoriaDAO categoriaDAO = new CategoriaDAO(context);
             categoriaDAO.open();
 
             produto.setProdutoCategoria(categoriaDAO.findById(idCategoria));
-            categoriaDAO.close();
+            categoriaDAO.close();*/
 
             produtos.add(produto);
         }
@@ -83,15 +84,19 @@ public class ProdutoDAO {
 
             while (cursor.moveToNext()) {
 
-                Categoria categoria = new Categoria();
-                categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO)));
+
 
                 Produto produto = new Produto();
                 produto.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO)));
                 produto.setTitulo(cursor.getString(cursor.getColumnIndex(DataBase.TITULO_PRODUTO)));
                 produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
                 produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
-                produto.setProdutoCategoria(categoria);
+                produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));
+
+              /*  Categoria categoria = new Categoria();
+                categoria.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO)));
+                produto.setProdutoCategoria(categoria);*/
+
                 produtos.add(produto);
             }
 

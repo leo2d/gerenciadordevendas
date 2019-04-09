@@ -2,25 +2,11 @@ package com.leonardo.gerenciadordevendas.entities;
 
 import java.io.Serializable;
 
-public class Categoria implements Serializable {
+public class Categoria extends BaseEntity {
 
-    private int idCategoria;
     private String nome;
 
     public Categoria() {
-    }
-
-    public Categoria(int idCategoria, String nome) {
-        this.idCategoria = idCategoria;
-        this.nome = nome;
-    }
-
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getNome() {

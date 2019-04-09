@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gerenciador de Vendas</string>
+    <string name="title_activity_lista_vendas">ListaVendasActivity</string>
 </resources>

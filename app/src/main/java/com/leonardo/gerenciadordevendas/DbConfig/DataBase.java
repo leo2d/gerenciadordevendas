@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DataBase extends SQLiteOpenHelper {
 
     private static final String DATA_BASE_NAME = "banco.db";
-    private static final int DATA_BASE_VERSION = 1;
+    private static final int DATA_BASE_VERSION = 3;
 
     //TABELA CLIENTE
 
@@ -16,8 +16,8 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String ID_CLIENTE = "idCliente";
     public static final String NOME_CLIENTE = "nomeCliente";
     public static final String TELEFONE_CLIENTE = "telefoneCliente";
-    public static final String RG_CLIENTE = "rgCliente";
     public static final String CPF_CLIENTE = "cpfCliente";
+    public static final String RG_CLIENTE = "rgCliente";
     public static final String EMAIL_CLIENTE = "emailCliente";
     //ligação
     //public static final String ID_VENDA_CLIENTE = "idVendaCliente";
@@ -27,7 +27,7 @@ public class DataBase extends SQLiteOpenHelper {
     //TABELA PARCELA
     public static final String TABELA_PARCELA = "tbl_parcela";
 
-    public static final String ID_PARCELA = "id";
+    public static final String ID_PARCELA = "idParcela";
     public static final String FOI_PAGA_PARCELA = "indicadorPagamento";
     public static final String DIA_VENCIMENTO_PARCELA = "diaVencimento";
     public static final String VALOR_PARCELA = "valorParcela";
@@ -45,7 +45,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TITULO_PRODUTO = "tituloProduto";
     public static final String DESCRICAO_PRODUTO = "descricaoProduto";
     public static final String PRECO_PRODUTO = "precoProduto";
-    public static final String ID_CATEGORIA_PRODUTO = "IdCategoria_produto";
+    public static final String ID_CATEGORIA_PRODUTO = "idCategoria";
 
 
     //-----------------------------------------------------------------------
@@ -59,8 +59,8 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String IS_PARCELADO_VENDA = "isParcelado";
     public static final String QUANTIDADE_PARCELAS_VENDA = "quantidadeParcela";
     //ligação
-    public static final String ID_PRODUTO_VENDA = "idProdutovenda";
-    public static final String ID_CLIENTE_VENDA = "iClienteVenda";
+    public static final String ID_PRODUTO_VENDA = "idProduto";
+    public static final String ID_CLIENTE_VENDA = "idCliente";
 
 
     //-----------------------------------------------------------------------
@@ -84,8 +84,8 @@ public class DataBase extends SQLiteOpenHelper {
             NOME_CLIENTE + " text not null, " +
             TELEFONE_CLIENTE + " text not null, " +
             CPF_CLIENTE + " text not null, " +
-            RG_CLIENTE + " text not null, " +
-            EMAIL_CLIENTE + " text not null " +
+            RG_CLIENTE + " text , " +
+            EMAIL_CLIENTE + " text " +
             ");";
 
     String tblParcela = "CREATE TABLE " + TABELA_PARCELA + " (" +
@@ -93,25 +93,25 @@ public class DataBase extends SQLiteOpenHelper {
             FOI_PAGA_PARCELA + " integer not null," +
             DIA_VENCIMENTO_PARCELA + " text not null," +
             VALOR_PARCELA + " text not null," +
-            ID_VENDA_PARCELA + " integer " +
+            ID_VENDA_PARCELA + " integer not null" +
             ");";
 
 
     String tblProduto = "CREATE TABLE " + TABELA_PRODUTO + " (" +
             ID_PRODUTO + " integer primary key autoincrement," +
             TITULO_PRODUTO + " text not null," +
-            DESCRICAO_PRODUTO + " text not null," +
+            DESCRICAO_PRODUTO + " text ," +
             PRECO_PRODUTO + " text not null, " +
-            ID_CATEGORIA_PRODUTO + " integer " +
+            ID_CATEGORIA_PRODUTO + " integer not null " +
             ");";
 
     String tblVenda = "CREATE TABLE " + TABELA_VENDA + " (" +
             ID_VENDA + " integer primary key autoincrement," +
             DATA_VENDA + " text not null," +
-            ID_PRODUTO_VENDA + " integer, " +
-            IS_PARCELADO_VENDA + " text not null," +
+            ID_PRODUTO_VENDA + " integer not null, " +
+            IS_PARCELADO_VENDA + " text," +
             QUANTIDADE_PARCELAS_VENDA + " text not null," +
-            ID_CLIENTE_VENDA + " integer " +
+            ID_CLIENTE_VENDA + " integer not null " +
             ");";
 
 

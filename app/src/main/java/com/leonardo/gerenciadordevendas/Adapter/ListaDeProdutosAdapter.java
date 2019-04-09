@@ -35,7 +35,7 @@ public class ListaDeProdutosAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return produtos.get(position).getIdProduto();
+        return produtos.get(position).getId();
     }
 
     @Override

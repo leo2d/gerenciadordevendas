@@ -40,7 +40,7 @@ public class CadastroDeClientesActivity extends AppCompatActivity {
             //preciso passar todos os atributos dele
             //Direto do construtor
 
-            Cliente cliente = new Cliente(1, campo_nome_cliente.getText().toString(),
+            Cliente cliente = new Cliente(campo_nome_cliente.getText().toString(),
                     campo_telefone_cliente.getText().toString(), campo_cpf_cliente.getText().toString(),
                     campo_rg_cliente.getText().toString(), campo_email_cliente.getText().toString());
 

@@ -4,21 +4,29 @@ import java.io.Serializable;
 
 public class Produto extends BaseEntity implements Serializable {
 
-    private int idProduto;
     private String titulo;
     private String descricao;
     private double preco;
+    private int idCategoria;
     private Categoria produtoCategoria;
 
     public Produto() {
     }
 
-    public Produto(int idProduto, String titulo, String descricao, double preco, Categoria produtoCategoria) {
-        this.idProduto = idProduto;
+    public Produto(String titulo, String descricao, double preco, int idCategoria, Categoria produtoCategoria) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.preco = preco;
+        this.idCategoria = idCategoria;
         this.produtoCategoria = produtoCategoria;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public Categoria getProdutoCategoria() {
@@ -27,14 +35,6 @@ public class Produto extends BaseEntity implements Serializable {
 
     public void setProdutoCategoria(Categoria produtoCategoria) {
         this.produtoCategoria = produtoCategoria;
-    }
-
-    public int getIdProduto() {
-        return idProduto;
-    }
-
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
     }
 
     public String getTitulo() {

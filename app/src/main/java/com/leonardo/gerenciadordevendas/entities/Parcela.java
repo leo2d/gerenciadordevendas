@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Parcela extends BaseEntity implements Serializable {
 
-    private int idParcela;
     private boolean foiPaga;
     private int indicadorPagamento;
     private String diaVencimento;
@@ -15,13 +14,6 @@ public class Parcela extends BaseEntity implements Serializable {
     public Parcela() {
     }
 
-    public Parcela(int idParcela, boolean foiPaga, String diaVencimento, double valor, Venda parcelaVenda) {
-        this.idParcela = idParcela;
-        this.foiPaga = foiPaga;
-        this.diaVencimento = diaVencimento;
-        this.valor = valor;
-        this.parcelaVenda = parcelaVenda;
-    }
 
     public Parcela(int diaVencimento, double valorParcela, int idVenda) {
         this.idVenda = idVenda;
@@ -60,14 +52,6 @@ public class Parcela extends BaseEntity implements Serializable {
 
     public void setParcelaVenda(Venda parcelaVenda) {
         this.parcelaVenda = parcelaVenda;
-    }
-
-    public int getIdParcela() {
-        return idParcela;
-    }
-
-    public void setIdParcela(int idParcela) {
-        this.idParcela = idParcela;
     }
 
 

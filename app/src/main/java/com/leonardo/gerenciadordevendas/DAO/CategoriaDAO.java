@@ -38,7 +38,7 @@ public class CategoriaDAO {
 
         while (cursor.moveToNext()) {
             Categoria categoria = new Categoria();
-            categoria.setIdCategoria(cursor.getInt(0));
+            categoria.setId(cursor.getInt(0));
             categoria.setNome(cursor.getString(1));
             categorias.add(categoria);
         }

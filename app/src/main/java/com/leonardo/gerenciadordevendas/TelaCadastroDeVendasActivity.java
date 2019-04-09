@@ -102,7 +102,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ValidarCamposObrigatorios())
+                if (ValidarCamposObrigatorios())
                     salvarVenda();
             }
         });
@@ -136,12 +136,13 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerProduto = findViewById(R.id.spinnerProduto);
     }
 
-    private boolean ValidarCamposObrigatorios(){
-        if(campoDataVenda.getText().toString().isEmpty() || campoDataVenda.getText() == null)
+    private boolean ValidarCamposObrigatorios() {
+        if (campoDataVenda.getText().toString().isEmpty() || campoDataVenda.getText() == null)
             return false;
 
         return true;
     }
+
     public void preencheSpinnerProdutos() {
 
         ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
@@ -166,8 +167,14 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             VendaDAO vendaDAO = new VendaDAO(getApplicationContext());
             vendaDAO.gravarVenda(venda);
 
+
+            for (Parcela p : venda.getParcelas()) {
+                p.setIdVenda(venda.getId());
+            }
+
             ParcelaDAO parcelaDAO = new ParcelaDAO(getApplicationContext());
             parcelaDAO.gravarParcelas(venda.getParcelas());
+            //finish();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

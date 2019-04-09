@@ -59,13 +59,13 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
 
 
             categoria = new Categoria();
-            categoria.setIdCategoria(spinner_categoria_produto.getSelectedItemPosition());
+            categoria.setId(spinner_categoria_produto.getSelectedItemPosition());
 
             double campoPreco = Double.parseDouble(campo_preco_protuto.getText().toString());
 
-            Produto  produto = new Produto(1, campo_titulo_produto.getText().toString(),
+            Produto  produto = new Produto(campo_titulo_produto.getText().toString(),
                     campo_descricao_produto.getText().toString(),
-                    campoPreco, categoria);
+                    campoPreco, categoria.getId(), categoria);
 
             ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
             produtoDAO.open();

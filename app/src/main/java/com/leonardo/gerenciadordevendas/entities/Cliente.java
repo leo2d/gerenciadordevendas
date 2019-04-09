@@ -1,11 +1,11 @@
 package com.leonardo.gerenciadordevendas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente extends BaseEntity implements Serializable {
 
-    private int id;
     private String nome;
     private String telefone;
     private String CPF;
@@ -16,13 +16,13 @@ public class Cliente extends BaseEntity implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(int id, String nome, String telefone, String CPF, String RG, String email) {
-        this.id = id;
+    public Cliente(String nome, String telefone, String CPF, String RG, String email) {
         this.nome = nome;
         this.telefone = telefone;
         this.CPF = CPF;
         this.RG = RG;
         this.email = email;
+        this.vendas = new ArrayList<Venda>();
     }
 
     public double calcularTotalDevedor() {
@@ -46,16 +46,6 @@ public class Cliente extends BaseEntity implements Serializable {
         }
 
         return resultado;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

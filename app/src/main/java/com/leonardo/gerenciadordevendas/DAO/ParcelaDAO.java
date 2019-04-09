@@ -56,7 +56,7 @@ public class ParcelaDAO {
             for (Parcela parcela : parcelas) {
                 String command = "INSERT INTO " + DataBase.TABELA_PARCELA + " (" + DataBase.FOI_PAGA_PARCELA + ", "
                         + DataBase.DIA_VENCIMENTO_PARCELA + ", " + DataBase.VALOR_PARCELA + ", " + DataBase.ID_VENDA_PARCELA
-                        + " VALUES (" + parcela.getIndicadorPagamento() + ", '" + parcela.getDiaVencimento() + "' , '" + parcela.getValor()
+                        + " ) VALUES (" + parcela.getIndicadorPagamento() + ", '" + parcela.getDiaVencimento() + "' , '" + parcela.getValor()
                         + "', " + parcela.getIdVenda() + ");";
 
                 conexao.execSQL(command);

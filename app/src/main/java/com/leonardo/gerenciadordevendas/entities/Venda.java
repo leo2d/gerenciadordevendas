@@ -6,29 +6,17 @@ import java.util.List;
 
 public class Venda extends BaseEntity  implements Serializable {
 
-    private int idVenda;
     private String dataVenda;
     private boolean isParcelado;
     private int quantidadeParcelas;
-    private List<Parcela>  parcelas;
     private int idProduto;
     private int idCliente;
     private Produto produtoVenda;
     private Cliente clienteVenda;
+    private List<Parcela>  parcelas;
 
     public Venda() {
         this.parcelas = new ArrayList<Parcela>();
-    }
-
-    public Venda(int idVenda, String dataVenda, boolean isParcelado, int quantidadeParcelas, List<Parcela> parcelas, Produto produtoVenda, Cliente clienteVenda) {
-        this.parcelas = new ArrayList<Parcela>();
-        this.idVenda = idVenda;
-        this.dataVenda = dataVenda;
-        this.isParcelado = isParcelado;
-        this.quantidadeParcelas = quantidadeParcelas;
-        this.parcelas = parcelas;
-        this.produtoVenda = produtoVenda;
-        this.clienteVenda = clienteVenda;
     }
 
     public void gerarParcelas(int diaVencimento) {
@@ -82,14 +70,6 @@ public class Venda extends BaseEntity  implements Serializable {
 
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
-    }
-
-    public int getIdVenda() {
-        return idVenda;
-    }
-
-    public void setIdVenda(int idVenda) {
-        this.idVenda = idVenda;
     }
 
     public boolean isParcelado() {

@@ -67,10 +67,10 @@ public class ParcelaDAO {
     }
 
     private String obterQuerybase() {
-        return "SELECT parcela.* FROM " + DataBase.TABELA_PARCELA + "parcela "
+        return "SELECT parcela.* FROM " + DataBase.TABELA_PARCELA + " parcela "
                 + "INNER JOIN " + DataBase.TABELA_VENDA + " venda "
                 + "ON venda." + DataBase.ID_VENDA + " = parcela." + DataBase.ID_VENDA_PARCELA
-                + " WHERE 1=1;";
+                + " WHERE 1=1 ";
     }
 
     public List<Parcela> getAll() {
@@ -84,14 +84,7 @@ public class ParcelaDAO {
             List<Parcela> parcelas = new ArrayList<>();
 
             while (cursor.moveToNext()) {
-
-                Parcela parcela = new Parcela();
-                parcela.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PARCELA)));
-                parcela.setIndicadorPagamento(cursor.getInt(cursor.getColumnIndex(DataBase.FOI_PAGA_PARCELA)));
-                parcela.setDiaVencimento(cursor.getString(cursor.getColumnIndex(DataBase.DIA_VENCIMENTO_PARCELA)));
-                parcela.setIdVenda(cursor.getInt(cursor.getColumnIndex(DataBase.ID_VENDA_PARCELA)));
-                parcela.setValor(cursor.getDouble(cursor.getColumnIndex(DataBase.VALOR_PARCELA)));
-                parcelas.add(parcela);
+                parcelas.add(obterParcela(cursor));
             }
 
             return parcelas;
@@ -108,19 +101,13 @@ public class ParcelaDAO {
 
             String query = obterQuerybase();
             query += " AND parcela." + DataBase.ID_VENDA_PARCELA + " = " + idVenda;
+            query += " ;";
 
             Cursor cursor = conexao.rawQuery(query, null);
             List<Parcela> parcelas = new ArrayList<>();
 
             while (cursor.moveToNext()) {
-
-                Parcela parcela = new Parcela();
-                parcela.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PARCELA)));
-                parcela.setIndicadorPagamento(cursor.getInt(cursor.getColumnIndex(DataBase.FOI_PAGA_PARCELA)));
-                parcela.setDiaVencimento(cursor.getString(cursor.getColumnIndex(DataBase.DIA_VENCIMENTO_PARCELA)));
-                parcela.setIdVenda(cursor.getInt(cursor.getColumnIndex(DataBase.ID_VENDA_PARCELA)));
-                parcela.setValor(cursor.getDouble(cursor.getColumnIndex(DataBase.VALOR_PARCELA)));
-                parcelas.add(parcela);
+                parcelas.add(obterParcela(cursor));
             }
 
             return parcelas;
@@ -128,6 +115,18 @@ public class ParcelaDAO {
         } finally {
             close();
         }
+    }
+
+    private Parcela obterParcela(Cursor cursor) {
+        Parcela parcela = new Parcela();
+
+        parcela.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PARCELA)));
+        parcela.setIndicadorPagamento(cursor.getInt(cursor.getColumnIndex(DataBase.FOI_PAGA_PARCELA)));
+        parcela.setDiaVencimento(cursor.getString(cursor.getColumnIndex(DataBase.DIA_VENCIMENTO_PARCELA)));
+        parcela.setIdVenda(cursor.getInt(cursor.getColumnIndex(DataBase.ID_VENDA_PARCELA)));
+        parcela.setValor(cursor.getDouble(cursor.getColumnIndex(DataBase.VALOR_PARCELA)));
+
+        return parcela;
     }
 
 }

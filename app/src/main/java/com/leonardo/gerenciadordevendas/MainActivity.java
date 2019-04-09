@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int TELA_CADASTRO_CLIENTE = 1;
     private static final int TELA_LISTA_CLIENTES = 2;
     private static final int TELA_PRODUTO = 3;
+    private static final int TELA_LISTA_VENDAS = 4;
 
     Button btn_cadastrar_cliente,
             btn_produtos, btn_vendas,
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent itn = new Intent(getApplicationContext(), TelaProdutosActivity.class);
                 startActivityForResult(itn, TELA_PRODUTO);
+            }
+        });
+
+        btn_vendas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itn = new Intent(getApplicationContext(), ListaVendasActivity.class);
+                startActivityForResult(itn, TELA_LISTA_VENDAS);
             }
         });
 

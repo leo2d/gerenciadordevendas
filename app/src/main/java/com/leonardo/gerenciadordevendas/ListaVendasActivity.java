@@ -6,24 +6,53 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
+
+import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
+import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
+import com.leonardo.gerenciadordevendas.entities.Parcela;
+import com.leonardo.gerenciadordevendas.entities.Venda;
+
+import java.util.List;
 
 public class ListaVendasActivity extends AppCompatActivity {
+
+    List<Venda> vendas;
+    ListView listaDeVendas;
+
+    private static final String VENDAS = "Vendas";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_vendas);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setTitle(VENDAS);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        bind();
+        popularVendas();
+
+    }
+
+    public void bind() {
+        listaDeVendas = findViewById(R.id.listaDeVendas);
+    }
+
+    public void popularVendas() {
+        try {
+            VendaDAO vendaDAO = new VendaDAO(getApplicationContext());
+            ParcelaDAO parcelaDAO = new ParcelaDAO(getApplicationContext());
+
+            vendas = vendaDAO.findAll();
+
+            for (Venda venda : vendas) {
+                List<Parcela> parcelas = parcelaDAO.buscarPorVenda(venda.getId());
+                venda.setParcelas(parcelas);
             }
-        });
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
 }

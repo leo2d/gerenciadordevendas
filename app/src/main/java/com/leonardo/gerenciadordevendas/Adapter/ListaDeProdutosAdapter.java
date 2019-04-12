@@ -54,6 +54,7 @@ public class ListaDeProdutosAdapter extends BaseAdapter {
         TextView preco = viewProduto.findViewById(R.id.item_produto_valor);
         preco.setText(String.valueOf(produtoDevolvido.getPreco()));
 
+
         int img1 = 0;
         img1 = Imagem(produtoDevolvido.getId(), img1);
 

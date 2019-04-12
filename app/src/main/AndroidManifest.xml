@@ -12,7 +12,7 @@
         <activity
             android:name=".ListaVendasActivity"
             android:label="@string/title_activity_lista_vendas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TelaCadastroDeVendasActivity" />
         <activity android:name=".TelaListaProdutoActivity" />
         <activity android:name=".TelaCadastroProdutoActivity" />

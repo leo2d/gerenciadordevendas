@@ -1,5 +1,6 @@
 package com.leonardo.gerenciadordevendas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -25,10 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
+import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
 
 public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     public static final String TELA_CADASTRO_VENDAS = "Cadastro de Vendas";
+    public static final int TELA_LISTA_VENDA = 1;
     public Cliente idCliente;
 
     Button buttonSave;
@@ -104,6 +107,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (ValidarCamposObrigatorios())
                     salvarVenda();
+                finish();
             }
         });
     }
@@ -117,10 +121,9 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.item_menu_cadastrar_venda) {
-
-            //cadastro a venda aqui
-            finish();
+        if (itemId == R.id.item_menu_lista_venda) {
+            Intent intent = new Intent(getApplicationContext(), ListaVendasActivity.class);
+            startActivityForResult(intent, TELA_LISTA_VENDA);
         }
         return super.onOptionsItemSelected(item);
     }

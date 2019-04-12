@@ -1,8 +1,10 @@
 package com.leonardo.gerenciadordevendas;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.leonardo.gerenciadordevendas.Adapter.ListaDeVendaAdapter;
@@ -36,6 +38,16 @@ public class ListaVendaActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_filtros, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.item_filtro_data){
+            Intent intent = new Intent(getApplicationContext(), FiltroPorDataActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void bind() {

@@ -4,5 +4,6 @@
     <item
         android:id="@+id/item_filtro_data"
         android:title="Filtro por Data" />
-    <item android:title="Filtro por Parcela Paga" />
+    <item android:title="Vendas Pagas" />
+    <item android:title="Vendas em Debito" />
 </menu>

@@ -57,13 +57,26 @@ public class VendaDAO {
 
     private String obterQueryBase() {
         return " SELECT * FROM " + DataBase.TABELA_VENDA + " venda " +
-          //      " INNER JOIN " + DataBase.TABELA_PARCELA + " parcela " +
-          //      " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
+                //      " INNER JOIN " + DataBase.TABELA_PARCELA + " parcela " +
+                //      " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
                 " INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
                 " ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
                 " INNER JOIN " + DataBase.TABELA_PRODUTO + " produto " +
                 " ON produto." + DataBase.ID_PRODUTO + " = venda." + DataBase.ID_PRODUTO_VENDA
                 + " WHERE 1=1 ";
+    }
+
+
+    private String obterQueryBuscaData(String data) {
+
+        return " SELECT * FROM " + DataBase.TABELA_VENDA + " venda " +
+                //      " INNER JOIN " + DataBase.TABELA_PARCELA + " parcela " +
+                //      " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
+                " INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
+                " ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
+                " INNER JOIN " + DataBase.TABELA_PRODUTO + " produto " +
+                " ON produto." + DataBase.ID_PRODUTO + " = venda." + DataBase.ID_PRODUTO_VENDA
+                + " WHERE " + DataBase.DATA_VENDA + " LIKE '%" + data + "%'";
     }
 
     public List<Venda> findAll() {
@@ -85,6 +98,7 @@ public class VendaDAO {
             close();
         }
     }
+
 
     private Venda obterVenda(Cursor cursor) {
         Venda venda = new Venda();
@@ -116,5 +130,23 @@ public class VendaDAO {
         venda.setClienteVenda(cliente);
 
         return venda;
+    }
+
+    public List<Venda> buscarPelaData(String data) {
+        try {
+            open();
+
+            List<Venda> vendas = new ArrayList<>();
+            String query = obterQueryBuscaData(data) + ";";
+
+            Cursor cursor = conexao.rawQuery(query, null);
+
+            while (cursor.moveToNext()) {
+                vendas.add(obterVenda(cursor));
+            }
+            return vendas;
+        } finally {
+            close();
+        }
     }
 }

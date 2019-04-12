@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btn_vendas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itn = new Intent(getApplicationContext(), ListaVendasActivity.class);
+                Intent itn = new Intent(getApplicationContext(), ListaVendaActivity.class);
                 startActivityForResult(itn, TELA_LISTA_VENDAS);
             }
         });

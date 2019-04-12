@@ -122,7 +122,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.item_menu_lista_venda) {
-            Intent intent = new Intent(getApplicationContext(), ListaVendasActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ListaVendaActivity.class);
             startActivityForResult(intent, TELA_LISTA_VENDA);
         }
         return super.onOptionsItemSelected(item);

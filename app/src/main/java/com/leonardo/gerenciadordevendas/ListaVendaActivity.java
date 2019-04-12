@@ -1,25 +1,19 @@
 package com.leonardo.gerenciadordevendas;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ListView;
 
 import com.leonardo.gerenciadordevendas.Adapter.ListaDeVendaAdapter;
 import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
 import com.leonardo.gerenciadordevendas.entities.Parcela;
-import com.leonardo.gerenciadordevendas.entities.Produto;
 import com.leonardo.gerenciadordevendas.entities.Venda;
 
 import java.util.List;
 
-import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
-
-public class ListaVendasActivity extends AppCompatActivity {
+public class ListaVendaActivity extends AppCompatActivity {
 
     List<Venda> vendas;
     ListView listaDeVendas;
@@ -30,12 +24,18 @@ public class ListaVendasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_vendas);
+        setContentView(R.layout.activity_lista_venda);
         setTitle(VENDAS);
 
         bind();
         popularVendas();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_filtros, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void bind() {
@@ -62,6 +62,4 @@ public class ListaVendasActivity extends AppCompatActivity {
         listaDeVendas.setAdapter(listaDeVendaAdapter);
 
     }
-
-
 }

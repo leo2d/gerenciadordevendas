@@ -112,21 +112,6 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.item_menu_opcoes_cliente, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.item_menu_lista_venda) {
-            Intent intent = new Intent(getApplicationContext(), ListaVendaActivity.class);
-            startActivityForResult(intent, TELA_LISTA_VENDA);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void binding() {
         buttonSave = findViewById(R.id.buttonSave);

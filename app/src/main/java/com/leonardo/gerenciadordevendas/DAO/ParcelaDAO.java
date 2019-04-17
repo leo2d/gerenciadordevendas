@@ -22,7 +22,7 @@ public class ParcelaDAO {
     public ParcelaDAO(Context context) {
         dataBase = new DataBase(context);
         this.context = context;
-    }
+}
 
     public void open() {
         conexao = dataBase.getWritableDatabase();

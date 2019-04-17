@@ -9,14 +9,14 @@ public class Venda extends BaseEntity  implements Serializable {
     private String dataVenda;
     private boolean isParcelado;
     private int quantidadeParcelas;
-    private int idProduto;
     private int idCliente;
-    private Produto produtoVenda;
     private Cliente clienteVenda;
     private List<Parcela>  parcelas;
+    private List<ItemVenda> itens;
 
     public Venda() {
         this.parcelas = new ArrayList<Parcela>();
+        this.itens = new ArrayList<ItemVenda>();
     }
 
     public void gerarParcelas(int diaVencimento) {
@@ -29,8 +29,15 @@ public class Venda extends BaseEntity  implements Serializable {
             this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(valorProduto), this.getId()));
     }
 
-    private double calcularValorparcela() {
-        return produtoVenda.getPreco() / quantidadeParcelas;
+    private double calcularValorparcela()
+    {
+        double valorTotal = 0;
+
+        for (ItemVenda itemVenda: itens) {
+            valorTotal += itemVenda.calcularValor();
+        }
+
+        return valorTotal / quantidadeParcelas;
     }
 
     private double calcularValorparcela(double valorProduto) {
@@ -46,14 +53,6 @@ public class Venda extends BaseEntity  implements Serializable {
             }
 
         return resultado;
-    }
-
-    public int getIdProduto() {
-        return idProduto;
-    }
-
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
     }
 
     public int getIdCliente() {
@@ -94,14 +93,6 @@ public class Venda extends BaseEntity  implements Serializable {
 
     public void setParcelas(List<Parcela> parcelas) {
         this.parcelas = parcelas;
-    }
-
-    public Produto getProdutoVenda() {
-        return produtoVenda;
-    }
-
-    public void setProdutoVenda(Produto produtoVenda) {
-        this.produtoVenda = produtoVenda;
     }
 
     public Cliente getClienteVenda() {

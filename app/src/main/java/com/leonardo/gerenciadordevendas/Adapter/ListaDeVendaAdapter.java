@@ -53,9 +53,9 @@ public class ListaDeVendaAdapter extends BaseAdapter {
         cliente.setText(clienteNome);
 
 
-        TextView produto = viewVenda.findViewById(R.id.item_venda_produto);
+/*        TextView produto = viewVenda.findViewById(R.id.item_venda_produto);
         final String produtoTitulo = vendaDevolvida.getProdutoVenda().getTitulo();
-        produto.setText(produtoTitulo);
+        produto.setText(produtoTitulo);*/
 
         TextView quantParcela = viewVenda.findViewById(R.id.item_venda_parcelas);
         quantParcela.setText(String.valueOf(vendaDevolvida.getQuantidadeParcelas()));

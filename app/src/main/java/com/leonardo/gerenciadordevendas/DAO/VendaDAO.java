@@ -40,7 +40,6 @@ public class VendaDAO {
 
             ContentValues cv = new ContentValues();
             cv.put(DataBase.DATA_VENDA, venda.getDataVenda());
-            cv.put(DataBase.ID_PRODUTO_VENDA, venda.getIdProduto());
             cv.put(DataBase.IS_PARCELADO_VENDA, venda.isParcelado() ? 1 : 0);
             cv.put(DataBase.QUANTIDADE_PARCELAS_VENDA, venda.getQuantidadeParcelas());
             cv.put(DataBase.ID_CLIENTE_VENDA, venda.getIdCliente());
@@ -61,9 +60,7 @@ public class VendaDAO {
                 //      " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
                 " INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
                 " ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
-                " INNER JOIN " + DataBase.TABELA_PRODUTO + " produto " +
-                " ON produto." + DataBase.ID_PRODUTO + " = venda." + DataBase.ID_PRODUTO_VENDA
-                + " WHERE 1=1 ";
+                " WHERE 1=1 ";
     }
 
 
@@ -74,9 +71,9 @@ public class VendaDAO {
                 //      " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
                 " INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
                 " ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
-                " INNER JOIN " + DataBase.TABELA_PRODUTO + " produto " +
-                " ON produto." + DataBase.ID_PRODUTO + " = venda." + DataBase.ID_PRODUTO_VENDA
-                + " WHERE " + DataBase.DATA_VENDA + " LIKE '%" + data + "%'";
+//                " INNER JOIN " + DataBase.TABELA_PRODUTO + " produto "
+//                " ON produto." + DataBase.ID_PRODUTO + " = venda." + DataBase.ID_PRODUTO_VENDA
+                " WHERE " + DataBase.DATA_VENDA + " LIKE '%" + data + "%'";
     }
 
     public List<Venda> findAll() {
@@ -104,20 +101,19 @@ public class VendaDAO {
         Venda venda = new Venda();
         venda.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_VENDA)));
         venda.setIdCliente(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CLIENTE_VENDA)));
-        venda.setIdProduto(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO_VENDA)));
         venda.setQuantidadeParcelas(cursor.getInt(cursor.getColumnIndex(DataBase.QUANTIDADE_PARCELAS_VENDA)));
         venda.setDataVenda(cursor.getString(cursor.getColumnIndex(DataBase.DATA_VENDA)));
 
         venda.setParcelado(venda.getQuantidadeParcelas() > 1);
 
-        Produto produto = new Produto();
+/*        Produto produto = new Produto();
         produto.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO)));
         produto.setTitulo(cursor.getString(cursor.getColumnIndex(DataBase.TITULO_PRODUTO)));
         produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
         produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
-        produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));
+        produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));*/
 
-        venda.setProdutoVenda(produto);
+        //venda.setProdutoVenda(produto);
 
         Cliente cliente = new Cliente();
         cliente.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CLIENTE)));

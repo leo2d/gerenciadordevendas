@@ -180,7 +180,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
         int dia = 07; //TODO ; arrumar isso aqui
         venda.gerarParcelas(dia, selecionado.getPreco());
-        venda.setIdProduto(selecionado.getId());
+      //  venda.setIdProduto(selecionado.getId());
 
         for (Parcela p : venda.getParcelas()) {
             parcelabase = p;
@@ -192,7 +192,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         valorParcela.setText(temp);
         labelParcelas.setText(quantidadeParcelas + " x");
 
-        valorVenda.setText(selecionado.getPreco() + "");
+        valorVenda.setText("R$ " + selecionado.getPreco());
     }
 
 }

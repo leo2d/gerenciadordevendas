@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DataBase extends SQLiteOpenHelper {
 
     private static final String DATA_BASE_NAME = "banco.db";
-    private static final int DATA_BASE_VERSION = 3;
+    private static final int DATA_BASE_VERSION = 4;
 
     //TABELA CLIENTE
 
@@ -57,9 +57,9 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String ID_VENDA = "idVenda";
     public static final String DATA_VENDA = "dataVenda";
     public static final String IS_PARCELADO_VENDA = "isParcelado";
-    public static final String QUANTIDADE_PARCELAS_VENDA = "quantidadeParcela";
+    public static final String QUANTIDADE_PARCELAS_VENDA = "quantidadeParcelas";
     //ligação
-    public static final String ID_PRODUTO_VENDA = "idProduto";
+    // public static final String ID_PRODUTO_VENDA = "idProduto";
     public static final String ID_CLIENTE_VENDA = "idCliente";
 
 
@@ -71,6 +71,18 @@ public class DataBase extends SQLiteOpenHelper {
 
     public static final String ID_CATEGORIA = "idCategoria";
     public static final String NOME_CATEGORIA = "nomeCategoria";
+
+
+    //-----------------------------------------------------------------------
+
+    //TABELA ITEM VENDA
+
+    public static final String TABELA_ITEM_VENDA = "tbl_item_venda";
+
+    public static final String ID_ITEM_VENDA = "idItemVenda";
+    public static final String ID_PRODUTO_VENDA = "idProduto";
+    public static final String ID_VENDA_ITEM = "idVenda";
+    public static final String QUANTIDADE = "quantidade";
 
 
     public DataBase(Context context) {
@@ -102,16 +114,23 @@ public class DataBase extends SQLiteOpenHelper {
             TITULO_PRODUTO + " text not null," +
             DESCRICAO_PRODUTO + " text ," +
             PRECO_PRODUTO + " text not null, " +
-            ID_CATEGORIA_PRODUTO + " integer not null " +
+            ID_CATEGORIA_PRODUTO + " integer " +
             ");";
 
     String tblVenda = "CREATE TABLE " + TABELA_VENDA + " (" +
             ID_VENDA + " integer primary key autoincrement," +
             DATA_VENDA + " text not null," +
-            ID_PRODUTO_VENDA + " integer not null, " +
+            // ID_PRODUTO_VENDA + " integer not null, " +
             IS_PARCELADO_VENDA + " text," +
             QUANTIDADE_PARCELAS_VENDA + " text not null," +
             ID_CLIENTE_VENDA + " integer not null " +
+            ");";
+
+    String tblItemVenda = "CREATE TABLE " + TABELA_ITEM_VENDA + " (" +
+            ID_ITEM_VENDA + " integer primary key autoincrement," +
+            ID_PRODUTO_VENDA + " integer not null," +
+            ID_VENDA_ITEM + " integer not null, " +
+            QUANTIDADE + " integer not null " +
             ");";
 
 
@@ -134,6 +153,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(tblProduto);
         db.execSQL(tblVenda);
         db.execSQL(tblCategoria);
+        db.execSQL(tblItemVenda);
 
         db.execSQL(insertCategoria);
     }
@@ -145,6 +165,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL("drop table " + TABELA_PRODUTO);
         db.execSQL("drop table " + TABELA_VENDA);
         db.execSQL("drop table " + TABELA_CATEGORIA);
+        db.execSQL("drop table " + TABELA_ITEM_VENDA);
         onCreate(db);
     }
 }

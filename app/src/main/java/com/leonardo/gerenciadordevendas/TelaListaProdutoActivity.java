@@ -57,7 +57,14 @@ public class TelaListaProdutoActivity extends AppCompatActivity {
 
         produtoDAO.open();
         int i = 0;
-        produtos = produtoDAO.findAll();
+
+        try {
+            produtos = produtoDAO.findAll();
+
+        }catch (Exception ex){
+            System.out.println("");
+        }
+
 
         String[] prods = new String[produtos.size()];
         for (Produto produto : produtos) {

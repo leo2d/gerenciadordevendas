@@ -2,6 +2,7 @@ package com.leonardo.gerenciadordevendas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +35,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     public static final int TELA_LISTA_VENDA = 1;
     public Cliente idCliente;
 
-    Button buttonSave;
+    FloatingActionButton buttonSave;
     TextView labelParcelas;
     EditText valorParcela;
     EditText valorVenda;

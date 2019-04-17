@@ -1,152 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="730dp"
-    android:background="@drawable/fundo">
+    android:layout_height="match_parent">
 
-
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/scroll_principal"
         android:layout_width="match_parent"
         android:layout_height="730dp"
-        android:orientation="vertical">
+        android:background="@drawable/fundo">
 
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="38dp" />
-
-        <EditText
-            android:id="@+id/campoDataVenda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Data da Venda"
-            android:inputType="date"
-            android:textColor="@android:color/background_dark" />
 
         <LinearLayout
+            android:id="@+id/layout_principal"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_weight="0"
-            android:orientation="horizontal">
+            android:layout_height="730dp"
+            android:orientation="vertical">
+
 
             <Space
-                android:layout_width="12dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:layout_width="103dp"
-                android:layout_height="80dp"
-                android:text="Produto"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/spinnerProduto"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:spinnerMode="dropdown" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="120dp"
-            android:layout_weight="0"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="12dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <Switch
-                android:id="@+id/switch1Parcela"
-                android:layout_width="wrap_content"
-                android:layout_height="79dp"
-                android:layout_weight="0"
-                android:text="Parcelado" />
-
-            <Spinner
-                android:id="@+id/spinnerParcela"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:spinnerMode="dropdown" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="120dp"
-                android:layout_height="49dp"
-                android:layout_weight="1"
-                android:text="  Valor Parcelado"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/labelParcelas"
-                android:layout_width="3dp"
-                android:layout_height="33dp"
-                android:layout_weight="1"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp" />
+                android:layout_height="38dp" />
 
             <EditText
-                android:id="@+id/valorParcelado"
-                android:layout_width="59dp"
+                android:id="@+id/campoDataVenda"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="138dp"
-                android:layout_height="49dp"
                 android:layout_margin="8dp"
-                android:text="Valor da Venda:"
-                android:textSize="18sp" />
+                android:hint="Data da Venda"
+                android:inputType="date"
+                android:textColor="@android:color/background_dark" />
 
-            <EditText
-                android:id="@+id/valorVenda"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:layout_width="103dp"
+                    android:layout_height="80dp"
+                    android:text="Produto"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:spinnerMode="dropdown" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0" />
+
+                <Switch
+                    android:id="@+id/switch1Parcela"
+                    android:layout_width="wrap_content"
+                    android:layout_height="79dp"
+                    android:layout_weight="0"
+                    android:text="Parcelado" />
+
+                <Spinner
+                    android:id="@+id/spinnerParcela"
+                    android:layout_width="match_parent"
+                    android:layout_height="79dp"
+                    android:spinnerMode="dropdown" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberDecimal" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="120dp"
+                    android:layout_height="49dp"
+                    android:layout_weight="1"
+                    android:text="  Valor Parcelado"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/labelParcelas"
+                    android:layout_width="3dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/valorParcelado"
+                    android:layout_width="59dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="138dp"
+                    android:layout_height="49dp"
+                    android:layout_margin="8dp"
+                    android:text="Valor da Venda:"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/valorVenda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/buttonSave"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Concluir"
-                android:textStyle="bold" />
+    </ScrollView>
 
-        </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/buttonSave"
 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/scroll_principal"
+        android:layout_alignBottom="@+id/scroll_principal"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_check_mark_48" />
+</RelativeLayout>
 
-    </LinearLayout>
-
-</ScrollView>

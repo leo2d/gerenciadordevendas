@@ -40,6 +40,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     Spinner spinnerParcela;
     Spinner spinnerProduto;
     Spinner spinnerCategorias;
+    Spinner spinnerQuantidade;
     List<Produto> listaDeProduto;
     List<Categoria> listaDeCategorias;
     Venda venda;
@@ -65,6 +66,9 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         final Integer[] parcela = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.layout_spinner_parcelas, parcela);
         spinnerParcela.setAdapter(adapter);
+
+        ArrayAdapter<Integer> adapterQtd = new ArrayAdapter<Integer>(this, R.layout.spinner_item, parcela);
+        spinnerQuantidade.setAdapter(adapterQtd);
 
         spinnerParcela.setEnabled(false);
         spinnerProduto.setEnabled(false);
@@ -156,6 +160,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerParcela = findViewById(R.id.spinnerParcela);
         spinnerProduto = findViewById(R.id.spinnerProduto);
         spinnerCategorias = findViewById(R.id.spinnerCategoria);
+        spinnerQuantidade = findViewById(R.id.spinnerQuantidade);
     }
 
     private boolean ValidarCamposObrigatorios() {

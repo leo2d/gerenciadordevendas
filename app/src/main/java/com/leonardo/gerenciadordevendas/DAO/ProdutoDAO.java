@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.leonardo.gerenciadordevendas.DbConfig.DataBase;
-import com.leonardo.gerenciadordevendas.entities.Categoria;
 import com.leonardo.gerenciadordevendas.entities.Produto;
 
 import java.util.ArrayList;
@@ -42,31 +41,32 @@ public class ProdutoDAO {
 
     }
 
-    public List<Produto> findByCategoryProductId(int id) {
+    private Produto obterProduto(Cursor cursor){
 
-        String selectProductCategoryID = "SELECT * FROM " + DataBase.TABELA_PRODUTO + " WHERE "
-                + DataBase.ID_CATEGORIA_PRODUTO + "==" + id + ";";
+        Produto produto = new Produto();
+        produto.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO)));
+        produto.setTitulo(cursor.getString(cursor.getColumnIndex(DataBase.TITULO_PRODUTO)));
+        produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
+        produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
+        produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));
 
-        Cursor cursor = conexao.rawQuery(selectProductCategoryID, null);
+        return produto;
+    }
+
+    public List<Produto> buscarPorCategoria(int id) {
+
+        String query = "SELECT * FROM "
+                + DataBase.TABELA_PRODUTO
+                + " WHERE "
+                + DataBase.ID_CATEGORIA_PRODUTO + "=" + id + ";";
+
+        Cursor cursor = conexao.rawQuery(query, null);
         ArrayList<Produto> produtos = new ArrayList<>();
 
         while (cursor.moveToNext()) {
-
-            produto = new Produto();
-            produto.setTitulo(cursor.getString(cursor.getColumnIndex(DataBase.TITULO_PRODUTO)));
-            produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
-            produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
-            //PARA PEGAR O ID
-            produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));
-   /*         int idCategoria = cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO);
-            CategoriaDAO categoriaDAO = new CategoriaDAO(context);
-            categoriaDAO.open();
-
-            produto.setProdutoCategoria(categoriaDAO.findById(idCategoria));
-            categoriaDAO.close();*/
-
-            produtos.add(produto);
+            produtos.add(obterProduto(cursor));
         }
+
         return produtos;
     }
 
@@ -84,18 +84,12 @@ public class ProdutoDAO {
 
             while (cursor.moveToNext()) {
 
-
-
                 Produto produto = new Produto();
                 produto.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO)));
                 produto.setTitulo(cursor.getString(cursor.getColumnIndex(DataBase.TITULO_PRODUTO)));
                 produto.setDescricao(cursor.getString(cursor.getColumnIndex(DataBase.DESCRICAO_PRODUTO)));
                 produto.setPreco(cursor.getDouble(cursor.getColumnIndex(DataBase.PRECO_PRODUTO)));
                 produto.setIdCategoria(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO));
-
-              /*  Categoria categoria = new Categoria();
-                categoria.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CATEGORIA_PRODUTO)));
-                produto.setProdutoCategoria(categoria);*/
 
                 produtos.add(produto);
             }

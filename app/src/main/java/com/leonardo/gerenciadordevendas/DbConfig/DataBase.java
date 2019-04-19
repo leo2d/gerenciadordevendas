@@ -1,13 +1,17 @@
 package com.leonardo.gerenciadordevendas.DbConfig;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataBase extends SQLiteOpenHelper {
 
     private static final String DATA_BASE_NAME = "banco.db";
-    private static final int DATA_BASE_VERSION = 4;
+    private static final int DATA_BASE_VERSION = 8;
 
     //TABELA CLIENTE
 
@@ -45,7 +49,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TITULO_PRODUTO = "tituloProduto";
     public static final String DESCRICAO_PRODUTO = "descricaoProduto";
     public static final String PRECO_PRODUTO = "precoProduto";
-    public static final String ID_CATEGORIA_PRODUTO = "idCategoria";
+    public static final String ID_CATEGORIA_PRODUTO = "idCategoriaProduto";
 
 
     //-----------------------------------------------------------------------
@@ -143,7 +147,20 @@ public class DataBase extends SQLiteOpenHelper {
     String insertCategoria = "INSERT INTO " + DataBase.TABELA_CATEGORIA + " (" +
             " " + DataBase.ID_CATEGORIA + ", " + DataBase.NOME_CATEGORIA + " ) " +
             " VALUES (1, 'Fonte'), (2, 'Memoria RAM'), (3, 'Processador'), (4, 'Gabinete'), " +
-            "(5, 'Placa de Video'), (6,'Placa Mae'), (7, 'Perifericos'), (8,'Disco Rigido');";
+            "(5, 'Placa de Video'), (6,'Placa Mae'), (7, 'Perifericos'), (8,'Disco Rigido'), (9,'Outros');";
+
+
+    private void inserirCategoriasDefault(SQLiteDatabase db) {
+
+        String[] categoriasDef = {"Outros", "Fonte", "Memoria Ram", "Processador", "Placa de video", "Gabinete"};
+
+        for (String cat : categoriasDef) {
+            ContentValues cv = new ContentValues();
+            cv.put(DataBase.NOME_CATEGORIA, cat);
+            db.insert(DataBase.TABELA_CATEGORIA, "", cv);
+        }
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -155,7 +172,9 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(tblCategoria);
         db.execSQL(tblItemVenda);
 
-        db.execSQL(insertCategoria);
+        //db.execSQL(insertCategoria);
+
+        inserirCategoriasDefault(db);
     }
 
     @Override

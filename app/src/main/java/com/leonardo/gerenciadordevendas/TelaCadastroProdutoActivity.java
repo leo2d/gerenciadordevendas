@@ -25,8 +25,8 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
     EditText campo_titulo_produto,
             campo_descricao_produto,
             campo_preco_protuto;
-    Spinner spinner_categoria_produto;
-    List<Categoria> lista_categorias;
+    Spinner spinnerCategorias;
+    List<Categoria> listaDeCategorias;
     Produto produto;
     Produto idProduto;
     Categoria categoria;
@@ -57,9 +57,10 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.btn_menu_cadastrar_produto) {
 
-
-            categoria = new Categoria();
-            categoria.setId(spinner_categoria_produto.getSelectedItemPosition());
+            categoria= (Categoria)spinnerCategorias.getSelectedItem();
+            int idCategoriaSelecionada = categoria.getId();
+            idCategoriaSelecionada = idCategoriaSelecionada == 0 ? 1 : idCategoriaSelecionada;
+            categoria.setId(idCategoriaSelecionada);
 
             double campoPreco = Double.parseDouble(campo_preco_protuto.getText().toString());
 
@@ -81,24 +82,27 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         campo_titulo_produto =  findViewById(R.id.campoTituloProdutoCadastro);
         campo_descricao_produto =  findViewById(R.id.campoDescricaoProdutoCadastro);
         campo_preco_protuto =  findViewById(R.id.campoPrecoProdutoCadastro);
-        spinner_categoria_produto =  findViewById(R.id.spinnerCategoria);
+        spinnerCategorias =  findViewById(R.id.spinnerCategoria);
     }
 
     public void preencherSpinner() {
 
-        CategoriaDAO categoriaDAO = new CategoriaDAO(getApplicationContext());
-        categoriaDAO.open();
+        CategoriaDAO categoriaDAO = new CategoriaDAO(this.getApplicationContext());
 
-        int idx = 0;
-        lista_categorias = categoriaDAO.findAll();
-        String[] categorias = new String[lista_categorias.size()];
-        for (Categoria c: lista_categorias){
-            categorias[idx] = c.getNome();
-            idx++;
+        try {
+            categoriaDAO.open();
+            listaDeCategorias = categoriaDAO.findAll();
+
+            ArrayAdapter<Categoria> adapter =
+                    new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaDeCategorias);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinnerCategorias.setAdapter(adapter);
+        } catch (Exception ex) {
+            System.out.println("");
+        } finally {
+            categoriaDAO.close();
         }
-        categoriaDAO.close();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.layout_spinner, categorias);
-        spinner_categoria_produto.setAdapter(adapter);
 
     }
 }

@@ -38,8 +38,8 @@ public class CategoriaDAO {
 
         while (cursor.moveToNext()) {
             Categoria categoria = new Categoria();
-            categoria.setId(cursor.getInt(0));
-            categoria.setNome(cursor.getString(1));
+            categoria.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CATEGORIA)));
+            categoria.setNome(cursor.getString(cursor.getColumnIndex(DataBase.NOME_CATEGORIA)));
             categorias.add(categoria);
         }
         return categorias;

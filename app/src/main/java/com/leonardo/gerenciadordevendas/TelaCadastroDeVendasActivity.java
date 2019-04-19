@@ -1,23 +1,20 @@
 package com.leonardo.gerenciadordevendas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.leonardo.gerenciadordevendas.DAO.CategoriaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ProdutoDAO;
 import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
@@ -27,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
-import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
 
 public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
@@ -43,7 +39,9 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     Switch switchParcela;
     Spinner spinnerParcela;
     Spinner spinnerProduto;
+    Spinner spinnerCategorias;
     List<Produto> listaDeProduto;
+    List<Categoria> listaDeCategorias;
     Venda venda;
 
 
@@ -54,8 +52,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         setTitle(TELA_CADASTRO_VENDAS);
 
         binding();
-        preencheSpinnerProdutos();
-
+        preencherSpinnerCategorias();
 
         //pegando o cliente selecionado
         idCliente = (Cliente) getIntent().getSerializableExtra(CHAVE_CLIENTE);
@@ -70,11 +67,27 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerParcela.setAdapter(adapter);
 
         spinnerParcela.setEnabled(false);
+        spinnerProduto.setEnabled(false);
 
         switchParcela.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 spinnerParcela.setEnabled(switchParcela.isChecked());
+            }
+        });
+
+        spinnerCategorias.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                Categoria categoriaSelecionada = (Categoria) spinnerCategorias.getSelectedItem();
+
+                preencheSpinnerProdutos(categoriaSelecionada.getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
             }
         });
 
@@ -113,6 +126,25 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         });
     }
 
+    private void preencherSpinnerCategorias() {
+        CategoriaDAO categoriaDAO = new CategoriaDAO(this.getApplicationContext());
+
+        try {
+            categoriaDAO.open();
+            listaDeCategorias = categoriaDAO.findAll();
+
+            ArrayAdapter<Categoria> adapter =
+                    new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaDeCategorias);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinnerCategorias.setAdapter(adapter);
+        } catch (Exception ex) {
+            System.out.println("");
+        } finally {
+            categoriaDAO.close();
+        }
+    }
+
 
     private void binding() {
         buttonSave = findViewById(R.id.buttonSave);
@@ -123,6 +155,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         switchParcela = findViewById(R.id.switch1Parcela);
         spinnerParcela = findViewById(R.id.spinnerParcela);
         spinnerProduto = findViewById(R.id.spinnerProduto);
+        spinnerCategorias = findViewById(R.id.spinnerCategoria);
     }
 
     private boolean ValidarCamposObrigatorios() {
@@ -132,12 +165,12 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         return true;
     }
 
-    public void preencheSpinnerProdutos() {
+    public void preencheSpinnerProdutos(int idCategoria) {
 
         ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
         produtoDAO.open();
 
-        listaDeProduto = produtoDAO.findAll();
+        listaDeProduto = produtoDAO.buscarPorCategoria(idCategoria);
 
         produtoDAO.close();
 
@@ -146,7 +179,13 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerProduto.setAdapter(adapter);
+        spinnerProduto.setEnabled(!listaDeProduto.isEmpty());
 
+        if (null == listaDeProduto || listaDeProduto.isEmpty()) {
+            valorParcela.setText("R$ 00,00");
+            valorVenda.setText("R$ 00,00");
+            Toast.makeText(getApplicationContext(), "Nenhum produto encontrado para essa categoria.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void salvarVenda() {
@@ -175,25 +214,32 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         int quantidadeParcelas = (int) spinnerParcela.getSelectedItem();
 
         venda.setQuantidadeParcelas(quantidadeParcelas);
+        labelParcelas.setText(quantidadeParcelas + " x");
+
         Parcela parcelabase = null;
 
         Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
 
+        String baseValueText = "R$ ";
+
+        if (null == selecionado) {
+            valorParcela.setText(baseValueText + "00,00");
+            valorVenda.setText(baseValueText + "00,00");
+            return;
+        }
         int dia = 07; //TODO ; arrumar isso aqui
         venda.gerarParcelas(dia, selecionado.getPreco());
-      //  venda.setIdProduto(selecionado.getId());
+        //  venda.setIdProduto(selecionado.getId());
 
         for (Parcela p : venda.getParcelas()) {
             parcelabase = p;
             break;
         }
 
-        String temp = "R$ " + parcelabase.getValor();
-        temp = temp.replace(".", ",");
-        valorParcela.setText(temp);
-        labelParcelas.setText(quantidadeParcelas + " x");
+        String textValorParcela = parcelabase.getValor() + "".replace(".", ",");
 
-        valorVenda.setText("R$ " + selecionado.getPreco());
+        valorParcela.setText(baseValueText + textValorParcela);
+        valorVenda.setText(baseValueText + selecionado.getPreco());
     }
 
 }

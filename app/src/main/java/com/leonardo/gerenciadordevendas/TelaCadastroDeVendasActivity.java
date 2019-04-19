@@ -5,20 +5,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leonardo.gerenciadordevendas.DAO.CategoriaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ProdutoDAO;
 import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
-import com.leonardo.gerenciadordevendas.entities.*;
+import com.leonardo.gerenciadordevendas.entities.Categoria;
+import com.leonardo.gerenciadordevendas.entities.Cliente;
+import com.leonardo.gerenciadordevendas.entities.Parcela;
+import com.leonardo.gerenciadordevendas.entities.Produto;
+import com.leonardo.gerenciadordevendas.entities.Venda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +34,11 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     public Cliente idCliente;
 
     FloatingActionButton buttonSave;
-    TextView labelParcelas;
+    Button buttonAddProduto;
+
     EditText valorParcela;
     EditText valorVenda;
     EditText campoDataVenda;
-    Switch switchParcela;
     Spinner spinnerParcela;
     Spinner spinnerProduto;
     Spinner spinnerCategorias;
@@ -53,6 +55,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         setTitle(TELA_CADASTRO_VENDAS);
 
         binding();
+        desabilitarComponentes();
         preencherSpinnerCategorias();
 
         //pegando o cliente selecionado
@@ -62,24 +65,22 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         venda.setClienteVenda(idCliente);
         venda.setIdCliente(idCliente.getId());
 
+        preencherSpinnersFixos();
+        tratarEventos();
+
+    }
+
+    private void preencherSpinnersFixos() {
         //Generico, nao vindo do banco.
-        final Integer[] parcela = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.layout_spinner_parcelas, parcela);
+        final Integer[] quantidades = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.spinner_item, quantidades);
         spinnerParcela.setAdapter(adapter);
 
-        ArrayAdapter<Integer> adapterQtd = new ArrayAdapter<Integer>(this, R.layout.spinner_item, parcela);
+        ArrayAdapter<Integer> adapterQtd = new ArrayAdapter<Integer>(this, R.layout.spinner_item, quantidades);
         spinnerQuantidade.setAdapter(adapterQtd);
+    }
 
-        spinnerParcela.setEnabled(false);
-        spinnerProduto.setEnabled(false);
-
-        switchParcela.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                spinnerParcela.setEnabled(switchParcela.isChecked());
-            }
-        });
-
+    private void tratarEventos() {
         spinnerCategorias.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -98,6 +99,8 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerProduto.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+
                 atualizarValores();
             }
 
@@ -120,6 +123,20 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
         });
 
+        buttonAddProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // adicionar um item venda com o produto e listar ele na grid,
+                //atualizar valores
+                //ativar botao de parcelas
+                // depois setar o botao de salvar como ativo
+
+                spinnerParcela.setEnabled(true);
+                buttonSave.setEnabled(true);
+            }
+        });
+
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +147,20 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         });
     }
 
+    private void desabilitarComponentes() {
+        spinnerParcela.setEnabled(false);
+        spinnerProduto.setEnabled(false);
+        spinnerQuantidade.setEnabled(false);
+        buttonSave.setEnabled(false);
+        buttonAddProduto.setEnabled(false);
+    }
+
+    private void ativarComponentes() {
+
+        spinnerQuantidade.setEnabled(true);
+        buttonAddProduto.setEnabled(true);
+    }
+
     private void preencherSpinnerCategorias() {
         CategoriaDAO categoriaDAO = new CategoriaDAO(this.getApplicationContext());
 
@@ -138,7 +169,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             listaDeCategorias = categoriaDAO.findAll();
 
             ArrayAdapter<Categoria> adapter =
-                    new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaDeCategorias);
+                    new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, listaDeCategorias);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
             spinnerCategorias.setAdapter(adapter);
@@ -152,15 +183,14 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     private void binding() {
         buttonSave = findViewById(R.id.buttonSave);
-        labelParcelas = findViewById(R.id.labelParcelas);
         valorParcela = findViewById(R.id.valorParcelado);
         valorVenda = findViewById(R.id.valorVenda);
         campoDataVenda = findViewById(R.id.campoDataVenda);
-        switchParcela = findViewById(R.id.switch1Parcela);
         spinnerParcela = findViewById(R.id.spinnerParcela);
         spinnerProduto = findViewById(R.id.spinnerProduto);
         spinnerCategorias = findViewById(R.id.spinnerCategoria);
         spinnerQuantidade = findViewById(R.id.spinnerQuantidade);
+        buttonAddProduto = findViewById(R.id.buttonAddProduto);
     }
 
     private boolean ValidarCamposObrigatorios() {
@@ -180,17 +210,27 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         produtoDAO.close();
 
         ArrayAdapter<Produto> adapter =
-                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaDeProduto);
+                new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, listaDeProduto);
+
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerProduto.setAdapter(adapter);
-        spinnerProduto.setEnabled(!listaDeProduto.isEmpty());
+        //spinnerProduto.setEnabled(!listaDeProduto.isEmpty());
 
         if (null == listaDeProduto || listaDeProduto.isEmpty()) {
-            valorParcela.setText("R$ 00,00");
-            valorVenda.setText("R$ 00,00");
+            zerarValoresLabels();
             Toast.makeText(getApplicationContext(), "Nenhum produto encontrado para essa categoria.", Toast.LENGTH_LONG).show();
+
+            return;
         }
+
+        ativarComponentes();
+    }
+
+    private void zerarValoresLabels() {
+        valorParcela.setText("R$ 00,00");
+        valorVenda.setText("R$ 00,00");
     }
 
     private void salvarVenda() {
@@ -219,7 +259,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         int quantidadeParcelas = (int) spinnerParcela.getSelectedItem();
 
         venda.setQuantidadeParcelas(quantidadeParcelas);
-        labelParcelas.setText(quantidadeParcelas + " x");
+        // labelParcelas.setText(quantidadeParcelas + " x");
 
         Parcela parcelabase = null;
 
@@ -228,8 +268,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         String baseValueText = "R$ ";
 
         if (null == selecionado) {
-            valorParcela.setText(baseValueText + "00,00");
-            valorVenda.setText(baseValueText + "00,00");
+            zerarValoresLabels();
             return;
         }
         int dia = 07; //TODO ; arrumar isso aqui

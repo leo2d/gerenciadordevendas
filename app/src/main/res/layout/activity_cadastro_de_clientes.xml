@@ -1,68 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/fundo">
+    android:layout_height="match_parent">
 
-
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scroll_principal"
         android:layout_width="match_parent"
+        android:layout_height="730dp"
+        android:background="@drawable/fundo">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="36dp" />
+
+            <EditText
+                android:id="@+id/campoNomeClienteCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Nome"
+                android:inputType="textCapWords"
+                android:textColor="@android:color/background_dark" />
+
+
+            <EditText
+                android:id="@+id/campoTelefoneClienteCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Telefone"
+                android:inputType="phone"
+                android:textColor="@android:color/background_dark" />
+
+
+            <EditText
+                android:id="@+id/campoCpfClienteCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="CPF"
+                android:inputType="number"
+                android:textColor="@android:color/background_dark" />
+
+            <EditText
+                android:id="@+id/campoRgClienteCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="RG"
+                android:inputType="number"
+                android:textColor="@android:color/background_dark" />
+
+            <EditText
+                android:id="@+id/campoEmailClienteCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/background_dark" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/buttonSave"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="36dp" />
-
-        <EditText
-            android:id="@+id/campoNomeClienteCadastro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Nome"
-            android:inputType="textCapWords"
-            android:textColor="@android:color/background_dark" />
-
-
-        <EditText
-            android:id="@+id/campoTelefoneClienteCadastro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Telefone"
-            android:inputType="phone"
-            android:textColor="@android:color/background_dark" />
-
-
-        <EditText
-            android:id="@+id/campoCpfClienteCadastro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="CPF"
-            android:inputType="number"
-            android:textColor="@android:color/background_dark" />
-
-        <EditText
-            android:id="@+id/campoRgClienteCadastro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="RG"
-            android:inputType="number"
-            android:textColor="@android:color/background_dark" />
-
-        <EditText
-            android:id="@+id/campoEmailClienteCadastro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@android:color/background_dark" />
-
-    </LinearLayout>
-
-</ScrollView>
+        android:layout_alignRight="@+id/scroll_principal"
+        android:layout_alignBottom="@+id/scroll_principal"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_check_mark_48" />
+</RelativeLayout>

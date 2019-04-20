@@ -1,18 +1,19 @@
 package com.leonardo.gerenciadordevendas;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.leonardo.gerenciadordevendas.DAO.CategoriaDAO;
-import com.leonardo.gerenciadordevendas.DAO.ClienteDAO;
 import com.leonardo.gerenciadordevendas.DAO.ProdutoDAO;
 import com.leonardo.gerenciadordevendas.entities.Categoria;
-import com.leonardo.gerenciadordevendas.entities.Cliente;
 import com.leonardo.gerenciadordevendas.entities.Produto;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
 
     private static final String TELA_CADASTRO_PRODUTO = "Cadastro de Produtos";
 
+
+    FloatingActionButton buttonSave;
 
     EditText campo_titulo_produto,
             campo_descricao_produto,
@@ -43,6 +46,16 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         binding();
         preencherSpinner();
 
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ValidarCamposObrigatorios())
+                    salvarProduto();
+                else
+                    Toast.makeText(getBaseContext(), "Preencha todos os campos antes de salvar!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -57,32 +70,54 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.btn_menu_cadastrar_produto) {
 
-            categoria= (Categoria)spinnerCategorias.getSelectedItem();
-            int idCategoriaSelecionada = categoria.getId();
-            idCategoriaSelecionada = idCategoriaSelecionada == 0 ? 1 : idCategoriaSelecionada;
-            categoria.setId(idCategoriaSelecionada);
-
-            double campoPreco = Double.parseDouble(campo_preco_protuto.getText().toString());
-
-            Produto  produto = new Produto(campo_titulo_produto.getText().toString(),
-                    campo_descricao_produto.getText().toString(),
-                    campoPreco, categoria.getId(), categoria);
-
-            ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
-            produtoDAO.open();
-            produtoDAO.gravarProduto(produto);
-            produtoDAO.close();
-            finish();
-
+            if (ValidarCamposObrigatorios())
+                salvarProduto();
+            else
+                Toast.makeText(getBaseContext(), "Preencha todos os campos antes de salvar!", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean ValidarCamposObrigatorios() {
+        if (campo_preco_protuto.getText() == null ||
+                campo_preco_protuto.getText().toString().trim().isEmpty() ||
+                campo_titulo_produto.getText() == null ||
+                campo_titulo_produto.getText().toString().trim().isEmpty() ||
+                campo_descricao_produto.getText() == null ||
+                campo_descricao_produto.getText().toString().trim().isEmpty()
+        ) {
+
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void salvarProduto() {
+        categoria = (Categoria) spinnerCategorias.getSelectedItem();
+        int idCategoriaSelecionada = categoria.getId();
+        idCategoriaSelecionada = idCategoriaSelecionada == 0 ? 1 : idCategoriaSelecionada;
+        categoria.setId(idCategoriaSelecionada);
+
+        double campoPreco = Double.parseDouble(campo_preco_protuto.getText().toString());
+
+        Produto produto = new Produto(campo_titulo_produto.getText().toString(),
+                campo_descricao_produto.getText().toString(),
+                campoPreco, categoria.getId(), categoria);
+
+        ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
+        produtoDAO.open();
+        produtoDAO.gravarProduto(produto);
+        produtoDAO.close();
+        finish();
+    }
+
     private void binding() {
-        campo_titulo_produto =  findViewById(R.id.campoTituloProdutoCadastro);
-        campo_descricao_produto =  findViewById(R.id.campoDescricaoProdutoCadastro);
-        campo_preco_protuto =  findViewById(R.id.campoPrecoProdutoCadastro);
-        spinnerCategorias =  findViewById(R.id.spinnerCategoria);
+        campo_titulo_produto = findViewById(R.id.campoTituloProdutoCadastro);
+        campo_descricao_produto = findViewById(R.id.campoDescricaoProdutoCadastro);
+        campo_preco_protuto = findViewById(R.id.campoPrecoProdutoCadastro);
+        spinnerCategorias = findViewById(R.id.spinnerCategoria);
+        buttonSave = findViewById(R.id.buttonSave);
     }
 
     public void preencherSpinner() {
@@ -94,7 +129,7 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
             listaDeCategorias = categoriaDAO.findAll();
 
             ArrayAdapter<Categoria> adapter =
-                    new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaDeCategorias);
+                    new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, listaDeCategorias);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
             spinnerCategorias.setAdapter(adapter);

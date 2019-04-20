@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cadastrar_cliente = findViewById(R.id.btnCadastrarCliente);
         btn_produtos = findViewById(R.id.btnProdutos);
         btn_vendas = findViewById(R.id.btnVendas);
-        btn_sair_app = findViewById(R.id.btnSair);
+        /*btn_sair_app = findViewById(R.id.btnSair);*/
         btn_lista_de_clientes = findViewById(R.id.btnListaDeCliente);
     }
 }

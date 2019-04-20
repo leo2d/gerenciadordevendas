@@ -10,9 +10,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="32dp">
+            android:layout_marginTop="10dp">
 
 
             <TextView
@@ -26,8 +26,8 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="62dp"
-                android:layout_height="62dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_menu" />
 
@@ -40,37 +40,37 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="700dp">
+            android:layout_height="650dp"
+            android:layout_marginTop="30dp"
+            >
 
             <Button
                 android:id="@+id/btnCadastrarCliente"
-                android:layout_width="115dp"
-                android:layout_height="112dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="47dp"
                 android:layout_marginLeft="47dp"
-                android:layout_marginTop="42dp"
                 android:background="@drawable/ic_user"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnProdutos"
-                android:layout_width="116dp"
-                android:layout_height="112dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="48dp"
                 android:layout_marginEnd="46dp"
                 android:layout_marginRight="46dp"
                 android:background="@drawable/ic_shopping_bag" />
 
             <Button
                 android:id="@+id/btnVendas"
-                android:layout_width="116dp"
-                android:layout_height="112dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
@@ -79,7 +79,7 @@
                 android:layout_marginBottom="329dp"
                 android:background="@drawable/ic_sale" />
 
-            <Button
+           <!-- <Button
                 android:id="@+id/btnSair"
                 android:layout_width="116dp"
                 android:layout_height="112dp"
@@ -91,7 +91,7 @@
                 android:layout_marginBottom="145dp"
                 android:background="@drawable/ic_exit"
                 android:onClick="sairApp"
-                android:text="Sair" />
+                android:text="Sair" />-->
 
             <TextView
                 android:id="@+id/textView"
@@ -102,7 +102,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="175dp"
+                android:layout_marginTop="120dp"
                 android:text="Cadastrar Cliente"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
@@ -116,7 +116,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="70dp"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="392dp"
+                android:layout_marginTop="342dp"
                 android:text="Vendas"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
@@ -128,7 +128,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="177dp"
+                android:layout_marginTop="120dp"
                 android:layout_marginEnd="68dp"
                 android:layout_marginRight="68dp"
                 android:text="Produtos"
@@ -137,12 +137,12 @@
 
             <Button
                 android:id="@+id/btnListaDeCliente"
-                android:layout_width="116dp"
-                android:layout_height="112dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="262dp"
+                android:layout_marginTop="220dp"
                 android:layout_marginEnd="48dp"
                 android:layout_marginRight="48dp"
                 android:background="@drawable/ic_checklist" />

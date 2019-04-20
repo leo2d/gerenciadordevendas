@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.leonardo.gerenciadordevendas.Enums.TelaDeOrigemEnum;
+
+import static com.leonardo.gerenciadordevendas.ConstantesActivity.TELA_ORIGEM;
+
 public class TelaClientesActivity extends AppCompatActivity {
 
     Button btnListarClientes;
@@ -34,10 +38,13 @@ public class TelaClientesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent itn = new Intent(getApplicationContext(), ListaDeClientesActivity.class);
+
+                itn.putExtra(TELA_ORIGEM, TelaDeOrigemEnum.MenuClientes.getValue());
                 startActivityForResult(itn, TELA_LISTAR_CLIENTES);
             }
         });
     }
+
 
     private void bind() {
         btnCadastrarCliente = findViewById(R.id.btnCadastrarCliente);

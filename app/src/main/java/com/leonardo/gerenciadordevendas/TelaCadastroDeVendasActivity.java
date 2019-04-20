@@ -37,7 +37,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     public static final String TELA_CADASTRO_VENDAS = "Cadastro de Vendas";
     public static final int MAIN_MENU = 1;
-    public Cliente idCliente;
+    public Cliente cliente;
 
     FloatingActionButton buttonSave;
     Button buttonAddProduto;
@@ -68,11 +68,11 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         preencherSpinnerCategorias();
 
         //pegando o cliente selecionado
-        idCliente = (Cliente) getIntent().getSerializableExtra(CHAVE_CLIENTE);
+        cliente = (Cliente) getIntent().getSerializableExtra(CHAVE_CLIENTE);
 
         venda = new Venda();
-        venda.setClienteVenda(idCliente);
-        venda.setIdCliente(idCliente.getId());
+        venda.setClienteVenda(cliente);
+        venda.setIdCliente(cliente.getId());
 
         preencherSpinnersFixos();
         tratarEventos();
@@ -166,7 +166,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (ValidarCamposObrigatorios()) {
                     salvarVenda();
-                    Intent itn = new Intent(getApplicationContext(), ListaVendaActivity.class);
+                    Intent itn = new Intent(getApplicationContext(), MainActivity.class);
                     startActivityForResult(itn, MAIN_MENU);
                 } else {
                     Toast.makeText(getBaseContext(), "Preencha todos os campos antes de salvar!", Toast.LENGTH_LONG).show();

@@ -12,9 +12,11 @@ import android.widget.ListView;
 
 import com.leonardo.gerenciadordevendas.Adapter.ListaDeClientesAdapter;
 import com.leonardo.gerenciadordevendas.DAO.ClienteDAO;
+import com.leonardo.gerenciadordevendas.Enums.TelaDeOrigemEnum;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
 
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
+import static com.leonardo.gerenciadordevendas.ConstantesActivity.TELA_ORIGEM;
 
 import java.util.List;
 
@@ -26,12 +28,18 @@ public class ListaDeClientesActivity extends AppCompatActivity {
     List<Cliente> clientes;
     final int TELA_CADASTRO_VENDAS = 1;
     private ListaDeClientesAdapter adapter;
+    int telaDeOrigem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_clientes);
-        String title = 1 == 1 ? TELA_LISTA_CLIENTES : "Selecione o cliente";
+
+        telaDeOrigem = (int) getIntent().getSerializableExtra(TELA_ORIGEM);
+
+        String title = telaDeOrigem == TelaDeOrigemEnum.MenuClientes.getValue()
+                ? TELA_LISTA_CLIENTES
+                : "Selecione o cliente";
 
         setTitle(title);
 
@@ -41,9 +49,16 @@ public class ListaDeClientesActivity extends AppCompatActivity {
         lista_de_clientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent vaiParaTeladeVendas = new Intent(getApplicationContext(), TelaCadastroDeVendasActivity.class);
-                vaiParaTeladeVendas.putExtra(CHAVE_CLIENTE, clientes.get(position));
-                startActivityForResult(vaiParaTeladeVendas, TELA_CADASTRO_VENDAS);
+
+                if (telaDeOrigem == TelaDeOrigemEnum.MenuVendas.getValue()) {
+                    Intent intent = new Intent(getApplicationContext(), TelaCadastroDeVendasActivity.class);
+                    intent.putExtra(CHAVE_CLIENTE, clientes.get(position));
+                    startActivityForResult(intent, TELA_CADASTRO_VENDAS);
+                } else {
+                    /*Intent intent = new Intent(getApplicationContext(), TelaCadastroDeVendasActivity.class);
+                    intent.putExtra(CHAVE_CLIENTE, clientes.get(position));
+                    startActivityForResult(intent, TELA_CADASTRO_VENDAS);*/
+                }
             }
         });
     }

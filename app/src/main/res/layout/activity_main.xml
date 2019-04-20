@@ -20,11 +20,13 @@
                 android:id="@+id/txtinicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:text="Por Daniel e Leonardo"
-                android:textColor="@android:color/background_dark"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:editable="false"
+                android:enabled="false"
+                android:text="© 2019 Daniel e Leonardo"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="20sp" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -92,7 +94,8 @@
                 android:layout_marginTop="120dp"
                 android:text="Clientes"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -106,7 +109,8 @@
                 android:layout_marginTop="342dp"
                 android:text="Vendas"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -120,7 +124,8 @@
                 android:layout_marginRight="64dp"
                 android:text="Produtos"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
           <!--  <Button
                 android:id="@+id/btnListaDeCliente"

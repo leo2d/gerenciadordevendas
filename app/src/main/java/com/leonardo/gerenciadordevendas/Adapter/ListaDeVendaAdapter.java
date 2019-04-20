@@ -79,34 +79,34 @@ public class ListaDeVendaAdapter extends BaseAdapter {
     private int Imagem(int i, int img1) {
         switch (i) {
             case 1:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 2:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 3:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 4:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 5:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 6:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 7:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 8:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 9:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
             case 10:
-                img1 = R.drawable.ic_sale;
+                img1 = R.drawable.ic_shopping_bag;
                 break;
         }
         return img1;

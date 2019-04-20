@@ -68,34 +68,34 @@ public class ListaDeProdutosAdapter extends BaseAdapter {
     private int Imagem(int i, int img1) {
         switch (i) {
             case 1:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 2:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 3:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 4:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 5:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 6:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 7:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 8:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 9:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
             case 10:
-                img1 = R.drawable.ic_shopping_bag;
+                img1 = R.drawable.ic_box_svgrepo_com;
                 break;
         }
         return img1;

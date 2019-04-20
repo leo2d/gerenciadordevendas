@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class TelaProdutosActivity extends AppCompatActivity {
 
-    private static final String TELA_PRODUTO = "Tela Produtos";
+    private static final String TELA_PRODUTO = "Produtos";
     private static final int TELA_CADASTRO_PRODUTO = 1;
     private static final int TELA_LISTA_PRODUTO = 2;
     Button btn_tela_cadastro_produto, btn_tela_lista_produto;

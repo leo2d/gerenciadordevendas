@@ -7,18 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int TELA_CADASTRO_CLIENTE = 1;
-    private static final int TELA_LISTA_CLIENTES = 2;
-    private static final int TELA_PRODUTO = 3;
-    private static final int TELA_LISTA_VENDAS = 4;
+    private static final int TELA_CLIENTES = 1;
+    private static final int TELA_PRODUTOS = 2;
+    private static final int TELA_VENDAS = 3;
 
-    Button btn_cadastrar_cliente,
-            btn_produtos, btn_vendas,
-            btn_sair_app, btn_lista_de_clientes;
+    Button btnClientes, btnProdutos, btnVendas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,35 +23,27 @@ public class MainActivity extends AppCompatActivity {
 
         binding();
 
-        btn_cadastrar_cliente.setOnClickListener(new View.OnClickListener() {
+        btnClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itn = new Intent(getApplicationContext(), CadastroDeClientesActivity.class);
-                startActivityForResult(itn, TELA_CADASTRO_CLIENTE);
+                Intent itn = new Intent(getApplicationContext(), TelaClientesActivity.class);
+                startActivityForResult(itn, TELA_CLIENTES);
             }
         });
 
-        btn_lista_de_clientes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent itn = new Intent(getApplicationContext(), ListaDeClientesActivity.class);
-                startActivityForResult(itn, TELA_LISTA_CLIENTES);
-            }
-        });
-
-        btn_produtos.setOnClickListener(new View.OnClickListener() {
+        btnProdutos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent itn = new Intent(getApplicationContext(), TelaProdutosActivity.class);
-                startActivityForResult(itn, TELA_PRODUTO);
+                startActivityForResult(itn, TELA_PRODUTOS);
             }
         });
 
-        btn_vendas.setOnClickListener(new View.OnClickListener() {
+        btnVendas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itn = new Intent(getApplicationContext(), ListaVendaActivity.class);
-                startActivityForResult(itn, TELA_LISTA_VENDAS);
+                Intent itn = new Intent(getApplicationContext(), TelaVendasActivity.class);
+                startActivityForResult(itn, TELA_VENDAS);
             }
         });
 
@@ -93,10 +81,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void binding() {
-        btn_cadastrar_cliente = findViewById(R.id.btnCadastrarCliente);
-        btn_produtos = findViewById(R.id.btnProdutos);
-        btn_vendas = findViewById(R.id.btnVendas);
-        /*btn_sair_app = findViewById(R.id.btnSair);*/
-        btn_lista_de_clientes = findViewById(R.id.btnListaDeCliente);
+        btnClientes = findViewById(R.id.btnClientes);
+        btnProdutos = findViewById(R.id.btnProdutos);
+        btnVendas = findViewById(R.id.btnVendas);
     }
 }

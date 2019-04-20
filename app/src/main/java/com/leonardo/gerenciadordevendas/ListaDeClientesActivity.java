@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.leonardo.gerenciadordevendas.Adapter.ListaDeClientesAdapter;
 import com.leonardo.gerenciadordevendas.DAO.ClienteDAO;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
+
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
 
 import java.util.List;
@@ -30,7 +31,9 @@ public class ListaDeClientesActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_clientes);
-        setTitle(TELA_LISTA_CLIENTES);
+        String title = 1 == 1 ? TELA_LISTA_CLIENTES : "Selecione o cliente";
+
+        setTitle(title);
 
         binding();
         preencheLista();
@@ -62,10 +65,10 @@ public class ListaDeClientesActivity extends AppCompatActivity {
     }
 
     private void binding() {
-        lista_de_clientes =  findViewById(R.id.listaDeClientes);
+        lista_de_clientes = findViewById(R.id.listaDeClientes);
     }
 
-    private void preencheLista(){
+    private void preencheLista() {
 
         ClienteDAO clienteDAO = new ClienteDAO(getApplicationContext());
 

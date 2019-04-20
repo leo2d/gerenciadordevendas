@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DetalharVendaActivity extends AppCompatActivity {
 
-    public static final String VENDA_DETALHADA = "Venda Detalhada";
+    public static final String VENDA_DETALHADA = "Venda Nro ";
 
     Venda venda;
 
@@ -18,7 +18,7 @@ public class DetalharVendaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhar_venda);
 
-        setTitle(VENDA_DETALHADA);
+        setTitle(VENDA_DETALHADA + 666);
 
 
     }

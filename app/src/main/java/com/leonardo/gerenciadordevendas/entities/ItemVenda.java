@@ -11,6 +11,12 @@ public class ItemVenda extends BaseEntity {
     public ItemVenda() {
     }
 
+    public ItemVenda(int idProduto, int quantidade, Produto produto) {
+        this.idProduto = idProduto;
+        this.quantidade = quantidade;
+        this.produto = produto;
+    }
+
     public double calcularValor() {
         return produto.getPreco() * quantidade;
     }

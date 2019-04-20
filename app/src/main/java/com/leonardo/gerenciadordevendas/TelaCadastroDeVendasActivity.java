@@ -1,5 +1,6 @@
 package com.leonardo.gerenciadordevendas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -8,16 +9,21 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leonardo.gerenciadordevendas.DAO.CategoriaDAO;
+import com.leonardo.gerenciadordevendas.DAO.ItemVendaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ProdutoDAO;
 import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
 import com.leonardo.gerenciadordevendas.entities.Categoria;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
+import com.leonardo.gerenciadordevendas.entities.ItemVenda;
 import com.leonardo.gerenciadordevendas.entities.Parcela;
 import com.leonardo.gerenciadordevendas.entities.Produto;
 import com.leonardo.gerenciadordevendas.entities.Venda;
@@ -30,12 +36,14 @@ import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
 public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     public static final String TELA_CADASTRO_VENDAS = "Cadastro de Vendas";
-    public static final int TELA_LISTA_VENDA = 1;
+    public static final int MAIN_MENU = 1;
     public Cliente idCliente;
 
     FloatingActionButton buttonSave;
     Button buttonAddProduto;
 
+    TextView pagamentoLabel;
+    Switch switchPagamentoVista;
     EditText valorParcela;
     EditText valorVenda;
     EditText campoDataVenda;
@@ -45,6 +53,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     Spinner spinnerQuantidade;
     List<Produto> listaDeProduto;
     List<Categoria> listaDeCategorias;
+    List<ItemVenda> itensVenda;
     Venda venda;
 
 
@@ -70,14 +79,19 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     }
 
-    private void preencherSpinnersFixos() {
-        //Generico, nao vindo do banco.
-        final Integer[] quantidades = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.spinner_item, quantidades);
-        spinnerParcela.setAdapter(adapter);
+    private void binding() {
+        buttonSave = findViewById(R.id.buttonSave);
+        valorParcela = findViewById(R.id.valorParcelado);
+        valorVenda = findViewById(R.id.valorVenda);
+        campoDataVenda = findViewById(R.id.campoDataVenda);
+        spinnerParcela = findViewById(R.id.spinnerParcela);
+        spinnerProduto = findViewById(R.id.spinnerProduto);
+        spinnerCategorias = findViewById(R.id.spinnerCategoria);
+        spinnerQuantidade = findViewById(R.id.spinnerQuantidade);
+        buttonAddProduto = findViewById(R.id.buttonAddProduto);
+        switchPagamentoVista = findViewById(R.id.switchPagamentoVista);
+        pagamentoLabel = findViewById(R.id.pagamentoLabel);
 
-        ArrayAdapter<Integer> adapterQtd = new ArrayAdapter<Integer>(this, R.layout.spinner_item, quantidades);
-        spinnerQuantidade.setAdapter(adapterQtd);
     }
 
     private void tratarEventos() {
@@ -100,8 +114,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-
-                atualizarValores();
+                //atualizarValores();
             }
 
             @Override
@@ -113,6 +126,14 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerParcela.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                int quantidade = (int) spinnerParcela.getSelectedItem();
+                if (quantidade > 1) {
+                    switchPagamentoVista.setChecked(false);
+                    switchPagamentoVista.setEnabled(false);
+                }else{
+                    switchPagamentoVista.setEnabled(venda.getItens().size() > 0);
+                }
+
                 atualizarValores();
             }
 
@@ -127,12 +148,15 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // adicionar um item venda com o produto e listar ele na grid,
-                //atualizar valores
-                //ativar botao de parcelas
-                // depois setar o botao de salvar como ativo
+                adicionarItemNaVenda();
+                atualizarValores();
 
-                spinnerParcela.setEnabled(true);
+                spinnerParcela.setEnabled(!switchPagamentoVista.isChecked());
+
+                int quantidade = (int) spinnerParcela.getSelectedItem();
+
+                switchPagamentoVista.setEnabled(quantidade == 1);
+                switchPagamentoVista.setChecked(quantidade > 1 ? false : switchPagamentoVista.isChecked() );
                 buttonSave.setEnabled(true);
             }
         });
@@ -140,14 +164,45 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ValidarCamposObrigatorios())
+                if (ValidarCamposObrigatorios()) {
                     salvarVenda();
-                finish();
+                    Intent itn = new Intent(getApplicationContext(), ListaVendaActivity.class);
+                    startActivityForResult(itn, MAIN_MENU);
+                } else {
+                    Toast.makeText(getBaseContext(), "Preencha todos os campos antes de salvar!", Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+        switchPagamentoVista.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    pagamentoLabel.setText("Sim");
+                    spinnerParcela.setEnabled(false);
+                } else {
+                    pagamentoLabel.setText("Não");
+                    spinnerParcela.setEnabled(venda.getItens().size() > 0);
+                }
+            }
+        });
+        ;
+    }
+
+    private void preencherSpinnersFixos() {
+        //Generico, nao vindo do banco.
+        final Integer[] quantidades = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.spinner_item, quantidades);
+        spinnerParcela.setAdapter(adapter);
+
+        ArrayAdapter<Integer> adapterQtd = new ArrayAdapter<Integer>(this, R.layout.spinner_item, quantidades);
+        spinnerQuantidade.setAdapter(adapterQtd);
     }
 
     private void desabilitarComponentes() {
+        switchPagamentoVista.setEnabled(false);
         spinnerParcela.setEnabled(false);
         spinnerProduto.setEnabled(false);
         spinnerQuantidade.setEnabled(false);
@@ -157,6 +212,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
     private void ativarComponentes() {
 
+        spinnerProduto.setEnabled(true);
         spinnerQuantidade.setEnabled(true);
         buttonAddProduto.setEnabled(true);
     }
@@ -178,19 +234,6 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         } finally {
             categoriaDAO.close();
         }
-    }
-
-
-    private void binding() {
-        buttonSave = findViewById(R.id.buttonSave);
-        valorParcela = findViewById(R.id.valorParcelado);
-        valorVenda = findViewById(R.id.valorVenda);
-        campoDataVenda = findViewById(R.id.campoDataVenda);
-        spinnerParcela = findViewById(R.id.spinnerParcela);
-        spinnerProduto = findViewById(R.id.spinnerProduto);
-        spinnerCategorias = findViewById(R.id.spinnerCategoria);
-        spinnerQuantidade = findViewById(R.id.spinnerQuantidade);
-        buttonAddProduto = findViewById(R.id.buttonAddProduto);
     }
 
     private boolean ValidarCamposObrigatorios() {
@@ -216,41 +259,17 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerProduto.setAdapter(adapter);
-        //spinnerProduto.setEnabled(!listaDeProduto.isEmpty());
 
         if (null == listaDeProduto || listaDeProduto.isEmpty()) {
-            zerarValoresLabels();
             Toast.makeText(getApplicationContext(), "Nenhum produto encontrado para essa categoria.", Toast.LENGTH_LONG).show();
-
-            return;
+        } else {
+            ativarComponentes();
         }
-
-        ativarComponentes();
     }
 
     private void zerarValoresLabels() {
         valorParcela.setText("R$ 00,00");
         valorVenda.setText("R$ 00,00");
-    }
-
-    private void salvarVenda() {
-        venda.setDataVenda(campoDataVenda.getText().toString());
-
-        try {
-            VendaDAO vendaDAO = new VendaDAO(getApplicationContext());
-            vendaDAO.gravarVenda(venda);
-
-
-            for (Parcela p : venda.getParcelas()) {
-                p.setIdVenda(venda.getId());
-            }
-
-            ParcelaDAO parcelaDAO = new ParcelaDAO(getApplicationContext());
-            parcelaDAO.gravarParcelas(venda.getParcelas());
-            //finish();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 
     private void atualizarValores() {
@@ -259,21 +278,18 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         int quantidadeParcelas = (int) spinnerParcela.getSelectedItem();
 
         venda.setQuantidadeParcelas(quantidadeParcelas);
-        // labelParcelas.setText(quantidadeParcelas + " x");
 
         Parcela parcelabase = null;
 
-        Produto selecionado = (Produto) spinnerProduto.getSelectedItem();
-
         String baseValueText = "R$ ";
 
-        if (null == selecionado) {
+        if (venda.getItens().isEmpty()) {
             zerarValoresLabels();
             return;
         }
         int dia = 07; //TODO ; arrumar isso aqui
-        venda.gerarParcelas(dia, selecionado.getPreco());
-        //  venda.setIdProduto(selecionado.getId());
+
+        venda.gerarParcelas(dia);
 
         for (Parcela p : venda.getParcelas()) {
             parcelabase = p;
@@ -283,7 +299,49 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         String textValorParcela = parcelabase.getValor() + "".replace(".", ",");
 
         valorParcela.setText(baseValueText + textValorParcela);
-        valorVenda.setText(baseValueText + selecionado.getPreco());
+        valorVenda.setText(baseValueText + venda.getQuantidadeParcelas() * parcelabase.getValor());
+    }
+
+    private void adicionarItemNaVenda() {
+        int quantidade = (int) spinnerQuantidade.getSelectedItem();
+        Produto produtoSelecionado = (Produto) spinnerProduto.getSelectedItem();
+
+        ItemVenda itemVenda = new ItemVenda(produtoSelecionado.getId(), quantidade, produtoSelecionado);
+
+        venda.adicionarItemVenda(itemVenda);
+    }
+
+    private void salvarVenda() {
+        venda.setDataVenda(campoDataVenda.getText().toString());
+
+        try {
+            VendaDAO vendaDAO = new VendaDAO(getApplicationContext());
+            vendaDAO.gravarVenda(venda);
+
+            for (ItemVenda item : venda.getItens()) {
+                item.setIdVenda(venda.getId());
+            }
+
+            ItemVendaDAO itemVendaDAO = new ItemVendaDAO(getApplicationContext());
+            itemVendaDAO.gravarItensVenda(venda.getItens());
+
+            for (Parcela p : venda.getParcelas()) {
+                p.setIdVenda(venda.getId());
+
+                if (switchPagamentoVista.isChecked() && venda.getParcelas().size() == 1) {
+                    p.setFoiPaga(true);
+                    p.setIndicadorPagamento(1);
+                }
+            }
+
+            ParcelaDAO parcelaDAO = new ParcelaDAO(getApplicationContext());
+            parcelaDAO.gravarParcelas(venda.getParcelas());
+
+            Toast.makeText(getBaseContext(), "Venda salva com sucesso!", Toast.LENGTH_LONG).show();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 }

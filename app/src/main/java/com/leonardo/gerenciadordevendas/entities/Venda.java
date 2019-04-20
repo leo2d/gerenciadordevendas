@@ -24,9 +24,9 @@ public class Venda extends BaseEntity  implements Serializable {
             this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(), this.getId()));
     }
 
-    public void gerarParcelas(int diaVencimento, double valorProduto) {
+    public void gerarParcelas(int diaVencimento, double valorItem) {
         for (int i = 0; i < quantidadeParcelas; i++)
-            this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(valorProduto), this.getId()));
+            this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(valorItem), this.getId()));
     }
 
     private double calcularValorparcela()
@@ -53,6 +53,18 @@ public class Venda extends BaseEntity  implements Serializable {
             }
 
         return resultado;
+    }
+
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemVenda> itens) {
+        this.itens = itens;
+    }
+
+    public void adicionarItemVenda(ItemVenda itemVenda){
+        this.itens.add(itemVenda);
     }
 
     public int getIdCliente() {
@@ -85,6 +97,18 @@ public class Venda extends BaseEntity  implements Serializable {
 
     public void setQuantidadeParcelas(int quantidadeParcelas) {
         this.quantidadeParcelas = quantidadeParcelas;
+    }
+
+    public List<Parcela> getParcelasPagas() {
+        List<Parcela> parcelasPagas = new ArrayList<>();
+
+        for (Parcela p: parcelas) {
+            if(p.isFoiPaga()){
+                parcelasPagas.add(p);
+            }
+        }
+
+        return parcelasPagas;
     }
 
     public List<Parcela> getParcelas() {

@@ -41,6 +41,12 @@ public class ItemVendaDAO {
                 + " WHERE 1=1 ";
     }
 
+    public void gravarItensVenda(List<ItemVenda> itensVenda) {
+        for (ItemVenda item : itensVenda) {
+            gravarItemVenda(item);
+        }
+    }
+
     public void gravarItemVenda(ItemVenda itemVenda) {
 
         try {
@@ -52,9 +58,9 @@ public class ItemVendaDAO {
             cv.put(DataBase.QUANTIDADE, itemVenda.getQuantidade());
 
             long insertedId = conexao.insert(DataBase.TABELA_ITEM_VENDA, "", cv);
-            int idVenda = (int) (long) insertedId;
+            int idItemVenda = (int) (long) insertedId;
 
-            itemVenda.setId(idVenda);
+            itemVenda.setId(idItemVenda);
 
         } finally {
             close();

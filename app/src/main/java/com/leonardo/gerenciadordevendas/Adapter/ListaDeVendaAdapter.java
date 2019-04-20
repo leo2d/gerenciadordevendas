@@ -57,6 +57,9 @@ public class ListaDeVendaAdapter extends BaseAdapter {
         final String produtoTitulo = vendaDevolvida.getProdutoVenda().getTitulo();
         produto.setText(produtoTitulo);*/
 
+        TextView quantParcelasPagas = viewVenda.findViewById(R.id.quantidadeParcelasPagas);
+        quantParcelasPagas.setText(String.valueOf(vendaDevolvida.getParcelasPagas().size()));
+
         TextView quantParcela = viewVenda.findViewById(R.id.item_venda_parcelas);
         quantParcela.setText(String.valueOf(vendaDevolvida.getQuantidadeParcelas()));
 
@@ -65,7 +68,6 @@ public class ListaDeVendaAdapter extends BaseAdapter {
 
         int img1 = 0;
         img1 = Imagem(vendaDevolvida.getId(), img1);
-
 
         ImageView img;
         img = viewVenda.findViewById(R.id.imgVenda);

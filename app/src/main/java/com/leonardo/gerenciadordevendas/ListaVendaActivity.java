@@ -18,6 +18,7 @@ import com.leonardo.gerenciadordevendas.entities.Venda;
 import java.util.List;
 
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
+import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
 
 public class ListaVendaActivity extends AppCompatActivity {
 
@@ -41,7 +42,7 @@ public class ListaVendaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent detalharVenda = new Intent(getApplicationContext(), DetalharVendaActivity.class);
-                detalharVenda.putExtra("VENDA", vendas.get(position));
+                detalharVenda.putExtra(CHAVE_VENDA, vendas.get(position));
                 startActivityForResult(detalharVenda, TELA_DETALHE_VENDA);
             }
         });

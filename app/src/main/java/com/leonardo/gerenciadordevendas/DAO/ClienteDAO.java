@@ -56,7 +56,6 @@ public class ClienteDAO {
 
         while (cursor.moveToNext()) {
             Cliente cliente = new Cliente();
-            //Preciso pegar o Id do usuario aqui
             cliente.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CLIENTE)));
             cliente.setNome(cursor.getString(cursor.getColumnIndex(DataBase.NOME_CLIENTE)));
             cliente.setTelefone(cursor.getString(cursor.getColumnIndex(DataBase.TELEFONE_CLIENTE)));
@@ -72,19 +71,27 @@ public class ClienteDAO {
     public Cliente findById(int id) {
         // faz o select para procurar todos pelo ID
 
-        String selectCliente = "SELECT * FROM " + DataBase.TABELA_CLIENTE + " WHERE " + DataBase.ID_CLIENTE + "==" + id + ";";
+        open();
+
+        String selectCliente =
+                "SELECT * FROM " + DataBase.TABELA_CLIENTE +
+                        " WHERE " + DataBase.ID_CLIENTE + "=" + id + ";";
+
         Cursor cursor = conexao.rawQuery(selectCliente, null);
 
         Cliente cliente = new Cliente();
 
-        //Percorre cada atributo de usuario
         if (cursor.moveToNext()) {
-            cliente.setNome(cursor.getString(1));
-            cliente.setTelefone(cursor.getString(2));
-            cliente.setRG(cursor.getString(3));
-            cliente.setCPF(cursor.getString(4));
-            cliente.setEmail(cursor.getString(5));
+            cliente.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_CLIENTE)));
+            cliente.setNome(cursor.getString(cursor.getColumnIndex(DataBase.NOME_CLIENTE)));
+            cliente.setTelefone(cursor.getString(cursor.getColumnIndex(DataBase.TELEFONE_CLIENTE)));
+            cliente.setRG(cursor.getString(cursor.getColumnIndex(DataBase.RG_CLIENTE)));
+            cliente.setCPF(cursor.getString(cursor.getColumnIndex(DataBase.CPF_CLIENTE)));
+            cliente.setEmail(cursor.getString(cursor.getColumnIndex(DataBase.EMAIL_CLIENTE)));
         }
+
+        close();
+
         return cliente;
     }
 }

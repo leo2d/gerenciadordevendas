@@ -15,18 +15,13 @@ public class Venda extends BaseEntity  implements Serializable {
     private List<ItemVenda> itens;
 
     public Venda() {
-        this.parcelas = new ArrayList<Parcela>();
-        this.itens = new ArrayList<ItemVenda>();
+        this.parcelas = new ArrayList<>();
+        this.itens = new ArrayList<>();
     }
 
     public void gerarParcelas(int diaVencimento) {
         for (int i = 0; i < quantidadeParcelas; i++)
             this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(), this.getId()));
-    }
-
-    public void gerarParcelas(int diaVencimento, double valorItem) {
-        for (int i = 0; i < quantidadeParcelas; i++)
-            this.parcelas.add(new Parcela(diaVencimento, calcularValorparcela(valorItem), this.getId()));
     }
 
     private double calcularValorparcela()
@@ -38,10 +33,6 @@ public class Venda extends BaseEntity  implements Serializable {
         }
 
         return valorTotal / quantidadeParcelas;
-    }
-
-    private double calcularValorparcela(double valorProduto) {
-        return valorProduto / quantidadeParcelas;
     }
 
     public double  calcularTotalDevedor() {
@@ -109,6 +100,17 @@ public class Venda extends BaseEntity  implements Serializable {
         }
 
         return parcelasPagas;
+    }
+    public List<Parcela> getParcelasEmDebito() {
+        List<Parcela> parcelasEmDebito = new ArrayList<>();
+
+        for (Parcela p: parcelas) {
+            if(!p.isFoiPaga()){
+                parcelasEmDebito.add(p);
+            }
+        }
+
+        return parcelasEmDebito;
     }
 
     public List<Parcela> getParcelas() {

@@ -11,14 +11,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leonardo.gerenciadordevendas.Adapter.ListaItemVendaAdapter;
 import com.leonardo.gerenciadordevendas.DAO.ClienteDAO;
+import com.leonardo.gerenciadordevendas.DAO.ItemVendaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.Helpers.MoneyHelper;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
+import com.leonardo.gerenciadordevendas.entities.ItemVenda;
 import com.leonardo.gerenciadordevendas.entities.Parcela;
 import com.leonardo.gerenciadordevendas.entities.Venda;
 
@@ -37,11 +41,15 @@ public class DetalharVendaActivity extends AppCompatActivity {
     FloatingActionButton buttonSave;
     Venda venda;
 
+    List<ItemVenda> itensVenda;
+
+    ListView listaItens;
     TextView campoDataVenda;
-    //EditText cpfCliente, telefoneCliente, nomeCliente;
     TextView cpfCliente, telefoneCliente, nomeCliente;
     TextView valorDivida, valorVenda;
     Spinner spinnerPagarParcelas;
+    ListaItemVendaAdapter itemVendaAdapter;
+
     double valorRestante;
 
     int check = 0;
@@ -58,11 +66,10 @@ public class DetalharVendaActivity extends AppCompatActivity {
         popularParcelas();
 
         bind();
-        valorDivida.setInputType(InputType.TYPE_NULL);
-        valorVenda.setInputType(InputType.TYPE_NULL);
 
         preencherCampos();
         PreencherSpinnerparcelas();
+        preencherListaItens();
 
         TratarEventos();
         closseKeyboard();
@@ -119,8 +126,8 @@ public class DetalharVendaActivity extends AppCompatActivity {
 
         List<Parcela> parcelasAPagar = venda.getParcelasEmDebito();
 
-        for(int i = 0; i< quantidade; i++){
-             parcelasAPagar.get(i).setFoiPaga(true);
+        for (int i = 0; i < quantidade; i++) {
+            parcelasAPagar.get(i).setFoiPaga(true);
         }
 
         ParcelaDAO parcelaDAO = new ParcelaDAO(this);
@@ -156,7 +163,7 @@ public class DetalharVendaActivity extends AppCompatActivity {
     }
 
     private void preencherCampos() {
-        campoDataVenda.setText("Data da venda: " + venda.getDataVenda());
+        campoDataVenda.setText(" Data da venda: " + venda.getDataVenda());
 
         nomeCliente.setText(venda.getClienteVenda().getNome());
         cpfCliente.setText("CPF:  " + venda.getClienteVenda().getCPF());
@@ -165,6 +172,17 @@ public class DetalharVendaActivity extends AppCompatActivity {
 
         valorDivida.setText(MoneyHelper.formatarEmReal(venda.calcularTotalDevedor()));
         valorVenda.setText(MoneyHelper.formatarEmReal(venda.calcularValorTotal()));
+    }
+
+    private void preencherListaItens() {
+
+        ItemVendaDAO itemVendaDAO = new ItemVendaDAO(this);
+
+        itensVenda = itemVendaDAO.buscarPorVenda(venda.getId());
+
+        itemVendaAdapter = new ListaItemVendaAdapter(itensVenda, this);
+
+        listaItens.setAdapter(itemVendaAdapter);
     }
 
     private void bind() {
@@ -176,6 +194,7 @@ public class DetalharVendaActivity extends AppCompatActivity {
         valorVenda = findViewById(R.id.valorVenda);
         valorDivida = findViewById(R.id.valorDivida);
         buttonSave = findViewById(R.id.buttonSave);
+        listaItens = findViewById(R.id.listaItensVenda);
 
     }
 }

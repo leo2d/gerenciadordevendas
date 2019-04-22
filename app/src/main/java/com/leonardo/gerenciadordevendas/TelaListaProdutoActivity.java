@@ -48,7 +48,7 @@ public class TelaListaProdutoActivity extends AppCompatActivity {
     }
 
     private void binding() {
-        lista_de_produtos =  findViewById(R.id.listaDeProdutos);
+        lista_de_produtos = findViewById(R.id.listaDeProdutos);
     }
 
     private void preencheLista() {
@@ -56,21 +56,9 @@ public class TelaListaProdutoActivity extends AppCompatActivity {
         ProdutoDAO produtoDAO = new ProdutoDAO(getApplicationContext());
 
         produtoDAO.open();
-        int i = 0;
 
-        try {
-            produtos = produtoDAO.findAll();
+        produtos = produtoDAO.findAll();
 
-        }catch (Exception ex){
-            System.out.println("");
-        }
-
-
-        String[] prods = new String[produtos.size()];
-        for (Produto produto : produtos) {
-            prods[i] = produto.getTitulo();
-            i++;
-        }
 
         produtoDAO.close();
 

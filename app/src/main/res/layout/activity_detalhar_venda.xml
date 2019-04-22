@@ -8,14 +8,14 @@
     <ScrollView
         android:id="@+id/scroll_principal"
         android:layout_width="match_parent"
-        android:layout_height="730dp"
+        android:layout_height="match_parent"
         android:background="@drawable/fundo">
 
 
         <LinearLayout
             android:id="@+id/layout_principal"
             android:layout_width="match_parent"
-            android:layout_height="730dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
 
@@ -23,13 +23,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp" />
 
+
             <TextView
                 android:id="@+id/campoDataVenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:layout_marginLeft="12dp"
                 android:enabled="false"
-                android:hint="Data da Venda "
+                android:hint=" Data da Venda "
                 android:inputType="date"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
@@ -86,16 +88,6 @@
                     android:layout_height="40dp"
                     android:spinnerMode="dropdown" />
 
-                <!--        <Button
-                            android:id="@+id/buttonAddProduto"
-                            android:layout_width="70dp"
-                            android:layout_height="30dp"
-                            android:background="@color/colorAccent"
-                            android:text="Adicionar"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="12sp" />
-        -->
-
             </LinearLayout>
 
             <LinearLayout
@@ -109,77 +101,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0" />
 
-                <!--        <Switch
-                            android:id="@+id/switchPagamentoVista"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:text="Pagar dívida inteira:  "
-                            android:textSize="18sp" />
-
-
-                        <TextView
-                            android:id="@+id/pagamentoLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            />-->
-
             </LinearLayout>
-            <!--
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <Space
-                                android:layout_width="12dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0" />
-
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="50dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="0.5"
-                                android:text="Dividir em:"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
-
-                            <Spinner
-                                android:id="@+id/spinnerParcela"
-                                android:layout_width="40dp"
-                                android:layout_height="79dp"
-                                android:layout_weight="0.6"
-                                android:spinnerMode="dropdown" />
-
-                            <TextView
-                                android:id="@+id/labelParcelas"
-                                android:layout_width="3dp"
-                                android:layout_height="33dp"
-                                android:layout_weight="0.3"
-                                android:text="X"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="20sp" />
-
-                            <EditText
-                                android:id="@+id/valorParcelado"
-                                android:layout_width="59dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:clickable="false"
-                                android:cursorVisible="false"
-                                android:editable="false"
-                                android:ems="10"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:inputType="textPersonName"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-            -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -253,27 +175,6 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-            <!--
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_weight="0"
-                            android:orientation="horizontal">
-
-                            <Space
-                                android:layout_width="12dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0" />
-
-                            <TextView
-                                android:id="@+id/labelSecaoCliente"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="Dados do Cliente"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="18sp" />
-
-                        </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -299,9 +200,9 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="Nome"
-                    android:textSize="18sp"
                     android:inputType="textCapWords"
-                    android:textColor="@android:color/background_dark" />
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
 
 
                 <TextView
@@ -311,8 +212,8 @@
                     android:enabled="false"
                     android:hint="CPF"
                     android:inputType="number"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/background_dark" />
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/telefoneCliente"
@@ -321,16 +222,42 @@
                     android:enabled="false"
                     android:hint="Telefone"
                     android:inputType="phone"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/background_dark" />
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/labelSecaoItens"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="12dp"
+                    android:text="Itens da venda"
+
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
 
 
             </LinearLayout>
+
+
+            <ListView
+                android:id="@+id/listaItensVenda"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
 
         </LinearLayout>
 
 
     </ScrollView>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/buttonSave"

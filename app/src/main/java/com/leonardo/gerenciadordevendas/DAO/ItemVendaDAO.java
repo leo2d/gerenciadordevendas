@@ -33,11 +33,11 @@ public class ItemVendaDAO {
     }
 
     private String obterQuerybase() {
-        return "SELECT * FROM " + DataBase.TABELA_ITEM_VENDA + " item "
-                + "INNER JOIN " + DataBase.TABELA_VENDA + " venda "
-                + "ON venda." + DataBase.ID_VENDA + " = item." + DataBase.ID_VENDA_ITEM
-                + "INNER JOIN " + DataBase.TABELA_PRODUTO + " produto "
-                + "ON produto." + DataBase.ID_PRODUTO + " = item." + DataBase.ID_PRODUTO_VENDA
+        return " SELECT * FROM " + DataBase.TABELA_ITEM_VENDA + " item "
+                + " INNER JOIN " + DataBase.TABELA_VENDA + " venda "
+                + " ON venda." + DataBase.ID_VENDA + " = item." + DataBase.ID_VENDA_ITEM
+                + " INNER JOIN " + DataBase.TABELA_PRODUTO + " produto "
+                + " ON produto." + DataBase.ID_PRODUTO + " = item." + DataBase.ID_PRODUTO_VENDA
                 + " WHERE 1=1 ";
     }
 
@@ -85,7 +85,11 @@ public class ItemVendaDAO {
 
             return itens;
 
-        } finally {
+        }catch (Exception ex){
+            System.out.println("");
+            return new ArrayList<ItemVenda>();
+        }
+        finally {
             close();
         }
     }
@@ -94,7 +98,7 @@ public class ItemVendaDAO {
         ItemVenda itemVenda = new ItemVenda();
 
         itemVenda.setId(cursor.getInt(cursor.getColumnIndex(DataBase.ID_ITEM_VENDA)));
-        itemVenda.setQuantidade(cursor.getInt(cursor.getColumnIndex(DataBase.FOI_PAGA_PARCELA)));
+        itemVenda.setQuantidade(cursor.getInt(cursor.getColumnIndex(DataBase.QUANTIDADE)));
         itemVenda.setIdProduto(cursor.getInt(cursor.getColumnIndex(DataBase.ID_PRODUTO_VENDA)));
         itemVenda.setIdVenda(cursor.getInt(cursor.getColumnIndex(DataBase.ID_VENDA_ITEM)));
 

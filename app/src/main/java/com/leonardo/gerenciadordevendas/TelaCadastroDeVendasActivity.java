@@ -21,6 +21,7 @@ import com.leonardo.gerenciadordevendas.DAO.ItemVendaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ParcelaDAO;
 import com.leonardo.gerenciadordevendas.DAO.ProdutoDAO;
 import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
+import com.leonardo.gerenciadordevendas.Helpers.MoneyHelper;
 import com.leonardo.gerenciadordevendas.entities.Categoria;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
 import com.leonardo.gerenciadordevendas.entities.ItemVenda;
@@ -43,6 +44,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     Button buttonAddProduto;
 
     TextView pagamentoLabel;
+    TextView valorUn;
     Switch switchPagamentoVista;
     EditText valorParcela;
     EditText valorVenda;
@@ -91,6 +93,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         buttonAddProduto = findViewById(R.id.buttonAddProduto);
         switchPagamentoVista = findViewById(R.id.switchPagamentoVista);
         pagamentoLabel = findViewById(R.id.pagamentoLabel);
+        valorUn = findViewById(R.id.valorUn);
 
     }
 
@@ -114,12 +117,13 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                //atualizarValores();
+                Produto produto = (Produto) spinnerProduto.getSelectedItem();
+                valorUn.setText(MoneyHelper.formatarEmReal(produto.getPreco()));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                valorUn.setText("");
             }
         });
 
@@ -130,7 +134,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
                 if (quantidade > 1) {
                     switchPagamentoVista.setChecked(false);
                     switchPagamentoVista.setEnabled(false);
-                }else{
+                } else {
                     switchPagamentoVista.setEnabled(venda.getItens().size() > 0);
                 }
 
@@ -156,7 +160,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
                 int quantidade = (int) spinnerParcela.getSelectedItem();
 
                 switchPagamentoVista.setEnabled(quantidade == 1);
-                switchPagamentoVista.setChecked(quantidade > 1 ? false : switchPagamentoVista.isChecked() );
+                switchPagamentoVista.setChecked(quantidade > 1 ? false : switchPagamentoVista.isChecked());
                 buttonSave.setEnabled(true);
             }
         });
@@ -261,6 +265,7 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
         spinnerProduto.setAdapter(adapter);
 
         if (null == listaDeProduto || listaDeProduto.isEmpty()) {
+            valorUn.setText("");
             Toast.makeText(getApplicationContext(), "Nenhum produto encontrado para essa categoria.", Toast.LENGTH_LONG).show();
         } else {
             ativarComponentes();
@@ -268,8 +273,8 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     }
 
     private void zerarValoresLabels() {
-        valorParcela.setText("R$ 00,00");
-        valorVenda.setText("R$ 00,00");
+        valorParcela.setText(MoneyHelper.formatarEmReal(0));
+        valorVenda.setText(MoneyHelper.formatarEmReal(0));
     }
 
     private void atualizarValores() {
@@ -298,8 +303,9 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
 
         String textValorParcela = parcelabase.getValor() + "".replace(".", ",");
 
-        valorParcela.setText(baseValueText + textValorParcela);
-        valorVenda.setText(baseValueText + venda.getQuantidadeParcelas() * parcelabase.getValor());
+        valorParcela.setText(MoneyHelper.formatarEmReal(parcelabase.getValor()));
+        valorVenda.setText(MoneyHelper.formatarEmReal(
+                venda.getQuantidadeParcelas() * parcelabase.getValor()));
     }
 
     private void adicionarItemNaVenda() {

@@ -22,7 +22,7 @@ public class ParcelaDAO {
     public ParcelaDAO(Context context) {
         dataBase = new DataBase(context);
         this.context = context;
-}
+    }
 
     public void open() {
         conexao = dataBase.getWritableDatabase();
@@ -129,4 +129,24 @@ public class ParcelaDAO {
         return parcela;
     }
 
+    public void atualizarParcelas(List<Parcela> parcelas) {
+        for (Parcela p : parcelas) {
+            atualizarParcela(p);
+        }
+    }
+
+    private void atualizarParcela(Parcela p) {
+
+        open();
+
+        String command = "UPDATE " + dataBase.TABELA_PARCELA
+                + " SET " + dataBase.FOI_PAGA_PARCELA + " = " +  p.getIndicadorPagamento()
+                + " , " + dataBase.DIA_VENCIMENTO_PARCELA + " = " + p.getDiaVencimento()
+                + " , " + dataBase.VALOR_PARCELA + " = " + p.getValor()
+                + " WHERE " + DataBase.ID_PARCELA + " = " + p.getId();
+
+        conexao.execSQL(command);
+
+        close();
+    }
 }

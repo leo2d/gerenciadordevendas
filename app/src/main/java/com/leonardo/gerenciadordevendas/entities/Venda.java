@@ -45,6 +45,15 @@ public class Venda extends BaseEntity  implements Serializable {
 
         return resultado;
     }
+    public double  calcularValorTotal() {
+        double resultado = 0;
+
+            for (Parcela parcela : parcelas) {
+                    resultado += parcela.getValor();
+            }
+
+        return resultado;
+    }
 
     public List<ItemVenda> getItens() {
         return itens;

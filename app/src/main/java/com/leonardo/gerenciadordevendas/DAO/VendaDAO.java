@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.leonardo.gerenciadordevendas.DbConfig.DataBase;
 import com.leonardo.gerenciadordevendas.entities.Cliente;
-import com.leonardo.gerenciadordevendas.entities.Produto;
 import com.leonardo.gerenciadordevendas.entities.Venda;
 
 import java.util.ArrayList;
@@ -78,12 +77,18 @@ public class VendaDAO {
 
     private String obterQueryBuscaPorParcela() {
 
-        return " SELECT * FROM " + DataBase.TABELA_VENDA + " venda " +
-                " INNER JOIN " + DataBase.TABELA_PARCELA + " parcela " +
-                " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
-                //" INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
-                //" ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
-                " WHERE NOT IN (SELECT venda from parcela)";
+
+        return "SELECT a." + DataBase.ID_VENDA + " a." + DataBase.ID_VENDA_PARCELA + " FROM " +
+                DataBase.TABELA_VENDA + " a " + "LEFT OUTER JOIN " + DataBase.TABELA_PARCELA + " b " + " ON ( a." + DataBase.ID_VENDA + "=b." + DataBase.ID_VENDA_PARCELA + " ) WHERE " +
+                DataBase.QUANTIDADE_PARCELAS_VENDA + "=1";
+
+
+//        return " SELECT * FROM " + DataBase.TABELA_VENDA + " venda " +
+//                " INNER JOIN " + DataBase.TABELA_PARCELA + " parcela " +
+//                " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
+//                //" INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
+//                //" ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
+//                " WHERE NOT IN ("+ DataBase.TABELA_VENDA + " venda " + DataBase.TABELA_PARCELA + " parcela )";
     }
 
     public List<Venda> findAll() {

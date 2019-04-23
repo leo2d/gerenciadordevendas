@@ -14,7 +14,7 @@ import com.leonardo.gerenciadordevendas.entities.Venda;
 
 import java.util.List;
 
-public class FiltroVendasNaoParceladasActivity extends AppCompatActivity {
+public class FiltroVendasNaoParceladasEParceladasActivity extends AppCompatActivity {
 
     public static final String VENDA_NAO_PARCELADA = "Vendas não Parceladas";
     List<Venda> vendas;
@@ -24,7 +24,7 @@ public class FiltroVendasNaoParceladasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filtro_vendas_nao_parceladas);
+        setContentView(R.layout.activity_filtro_vendas_nao_parceladas_e_parceladas);
         setTitle(VENDA_NAO_PARCELADA);
         binding();
         preencherLista();
@@ -55,6 +55,8 @@ public class FiltroVendasNaoParceladasActivity extends AppCompatActivity {
             VendaDAO vendaDAO = new VendaDAO(getApplicationContext());
             ParcelaDAO parcelaDAO = new ParcelaDAO(getApplicationContext());
 
+            //metodo DAO
+            //Usar essa mesma activity para mostrar as vendas parceladas e nao parceladas
             vendas = vendaDAO.buscarVendaNaoParcelada();
 
             for (Venda venda : vendas) {

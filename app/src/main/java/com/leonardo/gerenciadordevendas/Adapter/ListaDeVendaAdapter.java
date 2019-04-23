@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leonardo.gerenciadordevendas.R;
+import com.leonardo.gerenciadordevendas.entities.ItemVenda;
 import com.leonardo.gerenciadordevendas.entities.Produto;
 import com.leonardo.gerenciadordevendas.entities.Venda;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ListaDeVendaAdapter extends BaseAdapter {
 
     private List<Venda> vendas;
+    private List<ItemVenda> itemVendas;
     private Context context;
 
     public ListaDeVendaAdapter(List<Venda> vendas, Context context) {
@@ -47,17 +49,15 @@ public class ListaDeVendaAdapter extends BaseAdapter {
                 .inflate(R.layout.adapter_lista_venda, viewGroup, false);
         Venda vendaDevolvida = vendas.get(position);
 
-
         TextView cliente = viewVenda.findViewById(R.id.item_venda_cliente);
         final String clienteNome = vendaDevolvida.getClienteVenda().getNome();
         cliente.setText(clienteNome);
 
+//        TextView produto = viewVenda.findViewById(R.id.item_venda_produto);
+//        final String produtoTitulo = String.valueOf(vendaDevolvida.getItens());
+//        produto.setText(produtoTitulo);
 
-/*        TextView produto = viewVenda.findViewById(R.id.item_venda_produto);
-        final String produtoTitulo = vendaDevolvida.getProdutoVenda().getTitulo();
-        produto.setText(produtoTitulo);*/
-
-        TextView quantParcelasPagas = viewVenda.findViewById(R.id.quantidadeParcelasPagas);
+        TextView quantParcelasPagas = viewVenda.findViewById(R.id.quant_parcelas_pagas);
         quantParcelasPagas.setText(String.valueOf(vendaDevolvida.getParcelasPagas().size()));
 
         TextView quantParcela = viewVenda.findViewById(R.id.item_venda_parcelas);

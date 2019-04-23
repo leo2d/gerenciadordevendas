@@ -76,6 +76,16 @@ public class VendaDAO {
                 " WHERE " + DataBase.DATA_VENDA + " LIKE '%" + data + "%'";
     }
 
+    private String obterQueryBuscaPorParcela() {
+
+        return " SELECT * FROM " + DataBase.TABELA_VENDA + " venda " +
+                " INNER JOIN " + DataBase.TABELA_PARCELA + " parcela " +
+                " ON parcela." + DataBase.ID_VENDA_PARCELA + " = venda." + DataBase.ID_VENDA_PARCELA +
+                //" INNER JOIN " + DataBase.TABELA_CLIENTE + " cliente " +
+                //" ON cliente." + DataBase.ID_CLIENTE + "= venda." + DataBase.ID_CLIENTE_VENDA +
+                " WHERE NOT IN (SELECT venda from parcela)";
+    }
+
     public List<Venda> findAll() {
 
         try {
@@ -134,6 +144,24 @@ public class VendaDAO {
 
             List<Venda> vendas = new ArrayList<>();
             String query = obterQueryBuscaData(data) + ";";
+
+            Cursor cursor = conexao.rawQuery(query, null);
+
+            while (cursor.moveToNext()) {
+                vendas.add(obterVenda(cursor));
+            }
+            return vendas;
+        } finally {
+            close();
+        }
+    }
+
+    public List<Venda> buscarVendaNaoParcelada() {
+        try {
+            open();
+
+            List<Venda> vendas = new ArrayList<>();
+            String query = obterQueryBuscaPorParcela() + ";";
 
             Cursor cursor = conexao.rawQuery(query, null);
 

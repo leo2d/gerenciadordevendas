@@ -36,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/textView13"
-                        android:layout_width="60dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="0"
@@ -62,7 +62,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="150dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Total Parcelas: "
@@ -87,7 +87,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="150dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Parcelas Pagas: "
@@ -113,7 +113,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Data venda: "

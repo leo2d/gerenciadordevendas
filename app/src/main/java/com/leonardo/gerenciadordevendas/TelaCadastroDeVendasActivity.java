@@ -241,7 +241,10 @@ public class TelaCadastroDeVendasActivity extends AppCompatActivity {
     }
 
     private boolean ValidarCamposObrigatorios() {
+
         if (campoDataVenda.getText().toString().isEmpty() || campoDataVenda.getText() == null)
+            return false;
+        else if(venda.getItens().size() < 1)
             return false;
 
         return true;

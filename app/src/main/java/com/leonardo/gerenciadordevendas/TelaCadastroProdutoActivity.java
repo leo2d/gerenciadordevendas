@@ -50,9 +50,12 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ValidarCamposObrigatorios())
+                if (ValidarCamposObrigatorios()) {
                     salvarProduto();
-                else
+
+                    Toast.makeText(getBaseContext(), "Produto Cadastrado com sucesso", Toast.LENGTH_LONG).show();
+                    finish();
+                } else
                     Toast.makeText(getBaseContext(), "Preencha todos os campos antes de salvar!", Toast.LENGTH_LONG).show();
             }
         });
@@ -70,9 +73,12 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.btn_menu_cadastrar_produto) {
 
-            if (ValidarCamposObrigatorios())
+            if (ValidarCamposObrigatorios()) {
                 salvarProduto();
-            else
+
+                Toast.makeText(getBaseContext(), "Produto Cadastrado com sucesso", Toast.LENGTH_LONG).show();
+                finish();
+            } else
                 Toast.makeText(getBaseContext(), "Preencha todos os campos antes de salvar!", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
@@ -109,7 +115,6 @@ public class TelaCadastroProdutoActivity extends AppCompatActivity {
         produtoDAO.open();
         produtoDAO.gravarProduto(produto);
         produtoDAO.close();
-        finish();
     }
 
     private void binding() {

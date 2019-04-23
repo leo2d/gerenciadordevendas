@@ -34,9 +34,12 @@ public class CadastroDeClientesActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ValidarCamposObrigatorios())
+                if (ValidarCamposObrigatorios()) {
                     salvarCliente();
-                else
+
+                    Toast.makeText(getBaseContext(), "Cliente Cadastrado com sucesso", Toast.LENGTH_LONG).show();
+                    finish();
+                } else
                     Toast.makeText(getBaseContext(), "Preencha NOME, TELEFONE e CPF antes de salvar!", Toast.LENGTH_LONG).show();
             }
         });
@@ -67,7 +70,6 @@ public class CadastroDeClientesActivity extends AppCompatActivity {
         clienteDAO.open();
         clienteDAO.gravarCliente(cliente);
         clienteDAO.close();
-        finish();
     }
 
     @Override
@@ -80,9 +82,12 @@ public class CadastroDeClientesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.btn_menu_cadastrar_cliente) {
-            if (ValidarCamposObrigatorios())
+            if (ValidarCamposObrigatorios()) {
                 salvarCliente();
-            else
+
+                Toast.makeText(getBaseContext(), "Cliente Cadastrado com sucesso", Toast.LENGTH_LONG).show();
+                finish();
+            } else
                 Toast.makeText(getBaseContext(), "Preencha NOME, TELEFONE e CPF antes de salvar!", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);

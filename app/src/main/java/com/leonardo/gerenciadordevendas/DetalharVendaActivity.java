@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -114,6 +115,8 @@ public class DetalharVendaActivity extends AppCompatActivity {
                 if (quantidade > 0) {
                     pagarParcela(quantidade);
                     Intent itn = new Intent(getApplicationContext(), MainActivity.class);
+
+                    Toast.makeText(getBaseContext(), quantidade+" parcelas pagas com sucesso!", Toast.LENGTH_LONG).show();
                     startActivityForResult(itn, MAIN_MENU);
                 } else {
                     Toast.makeText(getBaseContext(), "Selecione pelo menos uma parcela", Toast.LENGTH_LONG).show();
@@ -180,9 +183,19 @@ public class DetalharVendaActivity extends AppCompatActivity {
 
         itensVenda = itemVendaDAO.buscarPorVenda(venda.getId());
 
+        for (int i = 0; i< itensVenda.size(); i++){
+            ajustarTamanhoLista();
+        }
+
         itemVendaAdapter = new ListaItemVendaAdapter(itensVenda, this);
 
         listaItens.setAdapter(itemVendaAdapter);
+    }
+
+    private void ajustarTamanhoLista() {
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) listaItens.getLayoutParams();
+        lp.height += 150;
+        listaItens.setLayoutParams(lp);
     }
 
     private void bind() {

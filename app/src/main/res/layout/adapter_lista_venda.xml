@@ -55,6 +55,31 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="Data venda: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp"
+                        tools:text="Data venda: " />
+
+                    <TextView
+                        android:id="@+id/item_venda_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,56 +131,6 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="135dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:text="Produto:"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="18sp"
-                        tools:text="Produto:" />
-
-                    <TextView
-                        android:id="@+id/item_venda_produto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="135dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:text="Data venda: "
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="18sp"
-                        tools:text="Data venda: " />
-
-                    <TextView
-                        android:id="@+id/item_venda_data"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="18sp" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

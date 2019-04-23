@@ -53,7 +53,7 @@ public class ListaDeVendaAdapter extends BaseAdapter {
         final String clienteNome = vendaDevolvida.getClienteVenda().getNome();
         cliente.setText(clienteNome);
 
-        TextView quantParcelasPagas = viewVenda.findViewById(R.id.quantidadeParcelasPagas);
+        TextView quantParcelasPagas = viewVenda.findViewById(R.id.quant_parcelas_pagas);
         quantParcelasPagas.setText(String.valueOf(vendaDevolvida.getParcelasPagas().size()));
 
         TextView quantParcela = viewVenda.findViewById(R.id.item_venda_parcelas);

@@ -15,6 +15,7 @@ import com.leonardo.gerenciadordevendas.DAO.VendaDAO;
 import com.leonardo.gerenciadordevendas.entities.Parcela;
 import com.leonardo.gerenciadordevendas.entities.Venda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
@@ -56,12 +57,35 @@ public class ListaVendaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.item_filtro_data){
+        if (itemId == R.id.item_filtro_data) {
             Intent intent = new Intent(getApplicationContext(), FiltroPorDataActivity.class);
             startActivity(intent);
-        } else if (itemId == R.id.menu_venda_parcelada){
-            Intent intent = new Intent(getApplicationContext(), FiltroVendasNaoParceladasEParceladasActivity.class);
-            startActivity(intent);
+        } else if (itemId == R.id.item_vendasEmDebito) {
+
+            List<Venda> vendasEmDebito = new ArrayList<>();
+
+            for (Venda venda : vendas) {
+                if (!venda.getParcelasEmDebito().isEmpty())
+                    vendasEmDebito.add(venda);
+            }
+
+            listaDeVendaAdapter = new ListaDeVendaAdapter(vendasEmDebito, this);
+            listaDeVendas.setAdapter(listaDeVendaAdapter);
+
+        } else if (itemId == R.id.item_vendasPagas) {
+            List<Venda> vendasPagas = new ArrayList<>();
+
+            for (Venda venda : vendas) {
+                if (venda.getParcelasEmDebito().isEmpty())
+                    vendasPagas.add(venda);
+            }
+
+            listaDeVendaAdapter = new ListaDeVendaAdapter(vendasPagas, this);
+            listaDeVendas.setAdapter(listaDeVendaAdapter);
+
+        } else if (itemId == R.id.todas) {
+            listaDeVendaAdapter = new ListaDeVendaAdapter(vendas, this);
+            listaDeVendas.setAdapter(listaDeVendaAdapter);
         }
         return super.onOptionsItemSelected(item);
     }

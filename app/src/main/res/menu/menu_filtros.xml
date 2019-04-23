@@ -5,7 +5,12 @@
         android:id="@+id/item_filtro_data"
         android:title="Filtro por Data" />
     <item
-        android:id="@+id/menu_venda_parcelada"
-        android:title="Vendas Parceladas" />
-    <item android:title="Vendas em Debito" />
+        android:id="@+id/item_vendasPagas"
+        android:title="Vendas Pagas" />
+    <item
+        android:id="@+id/item_vendasEmDebito"
+        android:title="Vendas em Debito" />
+    <item
+        android:id="@+id/todas"
+        android:title="Todas" />
 </menu>

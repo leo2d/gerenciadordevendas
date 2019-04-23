@@ -36,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/textView13"
-                        android:layout_width="60dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="0"
@@ -62,7 +62,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="150dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Total Parcelas: "
@@ -87,7 +87,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="150dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Parcelas Pagas: "
@@ -96,7 +96,7 @@
                         tools:text="Parcelas Pagas: " />
 
                     <TextView
-                        android:id="@+id/quantidadeParcelasPagas"
+                        android:id="@+id/quant_parcelas_pagas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -113,7 +113,32 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="Produto:"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp"
+                        tools:text="Produto:" />
+
+                    <TextView
+                        android:id="@+id/item_venda_produto"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Data venda: "

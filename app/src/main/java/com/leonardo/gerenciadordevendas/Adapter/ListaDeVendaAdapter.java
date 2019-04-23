@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leonardo.gerenciadordevendas.R;
+import com.leonardo.gerenciadordevendas.entities.ItemVenda;
 import com.leonardo.gerenciadordevendas.entities.Produto;
 import com.leonardo.gerenciadordevendas.entities.Venda;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ListaDeVendaAdapter extends BaseAdapter {
 
     private List<Venda> vendas;
+    private List<ItemVenda> itemVendas;
     private Context context;
 
     public ListaDeVendaAdapter(List<Venda> vendas, Context context) {
@@ -46,7 +48,6 @@ public class ListaDeVendaAdapter extends BaseAdapter {
                 .from(context)
                 .inflate(R.layout.adapter_lista_venda, viewGroup, false);
         Venda vendaDevolvida = vendas.get(position);
-
 
         TextView cliente = viewVenda.findViewById(R.id.item_venda_cliente);
         final String clienteNome = vendaDevolvida.getClienteVenda().getNome();

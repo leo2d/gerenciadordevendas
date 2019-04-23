@@ -17,7 +17,6 @@ import com.leonardo.gerenciadordevendas.entities.Venda;
 
 import java.util.List;
 
-import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_CLIENTE;
 import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
 
 public class ListaVendaActivity extends AppCompatActivity {
@@ -59,6 +58,9 @@ public class ListaVendaActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.item_filtro_data){
             Intent intent = new Intent(getApplicationContext(), FiltroPorDataActivity.class);
+            startActivity(intent);
+        } else if (itemId == R.id.menu_venda_parcelada){
+            Intent intent = new Intent(getApplicationContext(), FiltroVendasNaoParceladasEParceladasActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

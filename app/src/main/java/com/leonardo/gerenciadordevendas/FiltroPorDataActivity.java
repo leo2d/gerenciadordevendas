@@ -1,6 +1,5 @@
 package com.leonardo.gerenciadordevendas;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -76,6 +75,6 @@ public class FiltroPorDataActivity extends AppCompatActivity {
 
     private void binding() {
         campoFiltroData = findViewById(R.id.campoFiltroData);
-        filtroListaData = findViewById(R.id.filtroListaPesquisa);
+        filtroListaData = findViewById(R.id.filtroListaNaoParcelada);
     }
 }

@@ -23,6 +23,7 @@ import static com.leonardo.gerenciadordevendas.ConstantesActivity.CHAVE_VENDA;
 public class ListaVendaActivity extends AppCompatActivity {
 
     List<Venda> vendas;
+    List<Venda> vendasSotck;
     ListView listaDeVendas;
     ListaDeVendaAdapter listaDeVendaAdapter;
 
@@ -69,7 +70,8 @@ public class ListaVendaActivity extends AppCompatActivity {
                     vendasEmDebito.add(venda);
             }
 
-            listaDeVendaAdapter = new ListaDeVendaAdapter(vendasEmDebito, this);
+            vendas = vendasEmDebito;
+            listaDeVendaAdapter = new ListaDeVendaAdapter(vendas, this);
             listaDeVendas.setAdapter(listaDeVendaAdapter);
 
         } else if (itemId == R.id.item_vendasPagas) {
@@ -80,10 +82,12 @@ public class ListaVendaActivity extends AppCompatActivity {
                     vendasPagas.add(venda);
             }
 
-            listaDeVendaAdapter = new ListaDeVendaAdapter(vendasPagas, this);
+            vendas = vendasPagas;
+            listaDeVendaAdapter = new ListaDeVendaAdapter(vendas, this);
             listaDeVendas.setAdapter(listaDeVendaAdapter);
 
         } else if (itemId == R.id.todas) {
+            vendas = vendasSotck;
             listaDeVendaAdapter = new ListaDeVendaAdapter(vendas, this);
             listaDeVendas.setAdapter(listaDeVendaAdapter);
         }
@@ -110,6 +114,7 @@ public class ListaVendaActivity extends AppCompatActivity {
             System.out.println(ex.getMessage());
         }
 
+        vendasSotck = vendas;
         listaDeVendaAdapter = new ListaDeVendaAdapter(vendas, this);
         listaDeVendas.setAdapter(listaDeVendaAdapter);
 
